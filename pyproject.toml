@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eld-device-log-parser"
+version = "0.1.0"
+description = "Turn ELD firmware logs into event tables and device-observability metrics: serial round-trips, MQTT acks, state machine, offline recovery, ECM data gaps."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Jacob Chiang" }]
+dependencies = [
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "pyarrow>=14",
+    "matplotlib>=3.8",
+    "drain3>=0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.4"]
+
+[project.scripts]
+eldlog = "eldlog.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+filterwarnings = ["ignore::FutureWarning", "ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 200
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B905"]
