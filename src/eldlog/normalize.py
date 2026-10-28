@@ -124,7 +124,7 @@ class Deidentifier:
     url_re: re.Pattern = re.compile(r"\b(?:https?|mqtts?)://[^\s\"']+")
     coord_text_re: re.Pattern = re.compile(r"((?:Latitude|Longitude|gpsLatitude\]|gpsLongitude\]):\s*)(-?\d+\.\d+)")
     coord_json_re: re.Pattern = re.compile(r"(\"(?:lat|lon)\":\s*\")(-?\d+\.\d+)(\")")
-    secret_json_re: re.Pattern = re.compile(r"(\"(?:token|root_ca_checksum|root_ca_download_url|random|key)\":\s*\")([^\"]*)(\")")
+    secret_json_re: re.Pattern = re.compile(r"(\\?\"(?:token|root_ca_checksum|root_ca_download_url|random|key)\\?\":\s*\\?\")([^\"\\]*)(\\?\")")
     login_key_re: re.Pattern = re.compile(r"(\[Login\]\s*key\s*:\s*)(\S+)")
     carrier_re: re.Pattern = re.compile(r"\b1nce\b", re.I)
     counts: dict[str, int] = field(default_factory=dict)
@@ -168,6 +168,10 @@ class Deidentifier:
         t = self.iccid_re.sub(lambda mo: (self._bump("iccid"), self.pseudo.one("iccid", "ICCID-", mo.group(0)))[1], t)
         t = self.imei_re.sub(lambda mo: (self._bump("imei"), self.pseudo.one("imei", "IMEI-", mo.group(0)))[1], t)
         t = self.carrier_re.sub("<carrier>", t)
+        for h, rep in self._hex_subs:  # decoded frames such as "ECMData: ..." repeat the bytes
+            if h in t:
+                t = t.replace(h, rep)
+                self._bump("hex_identifier")
         if t.startswith("GPSData:"):
             self._bump("gps_frame")
             return "GPSData: " + " ".join(["xx"] * len(t.split()[1:]))
