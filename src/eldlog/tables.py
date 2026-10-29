@@ -121,7 +121,14 @@ def state_transitions(lines: pd.DataFrame) -> pd.DataFrame:
 
 # ---------------------------------------------------------------- MQTT uploads
 
-PAYLOAD_NUMERIC = ["speed", "rpm", "gps_speed", "gps_valid", "eng_mi", "eng_hr", "e_temp", "car_bat_v", "is_stored", "is_comp", "mode", "lat", "lon"]
+PAYLOAD_NUMERIC = ["speed", "rpm", "gps_speed", "gps_valid", "eng_mi", "eng_hr", "e_temp", "car_bat_v", "is_comp", "mode", "lat", "lon"]
+
+
+def _int_or_nan(v):
+    try:
+        return int(str(v))
+    except (TypeError, ValueError):
+        return np.nan
 
 
 def uploads(lines: pd.DataFrame) -> pd.DataFrame:
@@ -140,10 +147,10 @@ def uploads(lines: pd.DataFrame) -> pd.DataFrame:
             if "timestamp" in d and "mode" in d:
                 ack_rows.append({"ack_line_no": a["line_no"], "ack_ts": a["ts"], "timestamp": str(d.get("timestamp")), "ack_mode": str(d.get("mode")), "ack_is_stored": str(d.get("is_stored"))})
         ackdf = pd.DataFrame(ack_rows)
-        used = set()
         # state at publish time
         flows = g[g["pattern"] == "flow_start"][["line_no", "params"]].copy()
         flows["state"] = flows["params"].map(lambda s: _params(s).get("state"))
+        pub_rows = []
         for _, r in pubs.iterrows():
             try:
                 d = json.loads(_params(r["params"])["json"])
@@ -153,26 +160,31 @@ def uploads(lines: pd.DataFrame) -> pd.DataFrame:
             topic = _params(tp.iloc[-1]["params"]).get("topic") if len(tp) else None
             st = flows[flows["line_no"] < r["line_no"]]
             state = st.iloc[-1]["state"] if len(st) else None
-            row = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "state": state, "topic": topic, "mode": d.get("mode"), "is_stored": d.get("is_stored"),
-                   "payload_timestamp": d.get("timestamp"), "msg_code": d.get("msg_code"), "event_type": d.get("event_type"), "n_fields": len(d),
+            row = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "state": state, "topic": topic, "mode": d.get("mode"), "is_stored": _int_or_nan(d.get("is_stored")),
+                   "payload_timestamp": str(d.get("timestamp")), "msg_code": d.get("msg_code"), "event_type": d.get("event_type"), "n_fields": len(d),
                    "usn": d.get("usn"), "vin_present": bool(d.get("vin_id")) and d.get("vin_id") not in ("VINNOTYETDETECTED", ""), "driver_present": d.get("driver_id") not in (None, "", "NODRIVERID"),
                    "source_addr": d.get("source_addr"), "source_addr_lists": d.get("source_addr_lists"), "bk_bat_pct": _pct(d.get("bk_bat_v")), "disk_pct": _pct(d.get("disk_size")),
-                   "fw": d.get("e_fw_v"), "hw": d.get("e_hw_v"), "st_fw": d.get("s_m_v"), "ble_fw": d.get("ble_v"), "timezone": d.get("timezone")}
+                   "fw": d.get("e_fw_v"), "hw": d.get("e_hw_v"), "st_fw": d.get("s_m_v"), "ble_fw": d.get("ble_v"), "timezone": d.get("timezone"),
+                   "ack_line_no": np.nan, "ack_ts": pd.NaT, "ack_latency_s": np.nan, "acked": False}
             for k in PAYLOAD_NUMERIC:
                 row[k] = pd.to_numeric(d.get(k), errors="coerce") if d.get(k) not in (None, "", "N/A") else np.nan
-            # ack: same payload timestamp, first unused ack after the publish line
-            m = ackdf[(ackdf["timestamp"] == str(d.get("timestamp"))) & (ackdf["ack_line_no"] > r["line_no"]) & (~ackdf["ack_line_no"].isin(used))] if len(ackdf) else ackdf
-            if len(m):
-                a = m.iloc[0]
-                used.add(a["ack_line_no"])
-                row.update({"ack_line_no": a["ack_line_no"], "ack_ts": a["ack_ts"], "ack_latency_s": (a["ack_ts"] - r["ts"]).total_seconds(), "acked": True})
-            else:
-                row.update({"ack_line_no": np.nan, "ack_ts": pd.NaT, "ack_latency_s": np.nan, "acked": False})
-            out.append(row)
+            pub_rows.append(row)
+        # ack matching: an ack names the payload timestamp and the is_stored flag of the message it answers;
+        # take the latest unmatched publish before the ack with that timestamp, preferring the same is_stored flag
+        if len(ackdf):
+            for _, a in ackdf.sort_values("ack_line_no").iterrows():
+                cands = [i for i, pr in enumerate(pub_rows) if pr["payload_timestamp"] == a["timestamp"] and pr["line_no"] < a["ack_line_no"] and not pr["acked"]]
+                same = [i for i in cands if pub_rows[i]["is_stored"] == _int_or_nan(a["ack_is_stored"])]
+                pick = (same or cands)
+                if pick:
+                    pr = pub_rows[pick[-1]]
+                    pr.update({"ack_line_no": a["ack_line_no"], "ack_ts": a["ack_ts"], "ack_latency_s": (a["ack_ts"] - pr["ts"]).total_seconds(), "acked": True})
+        out.extend(pub_rows)
     df = pd.DataFrame(out)
     if len(df):
         df["interval_s"] = df.groupby("device_key")["ts"].diff().dt.total_seconds()
         df["mode_name"] = df["mode"].map(MODE_NAMES).fillna("mode " + df["mode"].astype(str))
+        df.loc[df["topic"].astype(str).str.endswith("/ota/ack"), "mode_name"] = "OTA command ack"
     return df
 
 
