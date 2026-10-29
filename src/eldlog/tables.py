@@ -200,44 +200,98 @@ def _pct(v):
 
 # ---------------------------------------------------------------- UART round-trips
 
+def _bus_of_bytes(first: str) -> str:
+    return {"60": "BLE", "06": "BLE", "80": "ST", "08": "ST"}.get(first, "unknown")
+
+
+def _bus_of_component(c: str | None) -> str | None:
+    if not c:
+        return None
+    if c.startswith("BLE") or c in ("TestModeGet",):
+        return "BLE"
+    if c.startswith("ST") or c in ("SourceMileageListGet", "SourceAddressSet"):
+        return "ST"
+    return None
+
+
 def uart_commands(lines: pd.DataFrame) -> pd.DataFrame:
+    """Pair each serial request with its reply on the same bus. The BLE module and the ST
+    micro-controller sit on separate UARTs and are driven by separate goroutines, so their
+    traffic interleaves in the log; pairing is therefore kept per bus. Unsolicited frames from
+    the BLE module (status notifications, command 0x23) are recorded as `direction = notify`."""
     out = []
     for dev, g in lines.groupby("device_key", sort=False):
         g = g.sort_values("line_no").reset_index(drop=True)
-        u = g[g["category"].isin(["uart", "error"]) | g["pattern"].isin(["uart_wait_timeout", "uart_mismatch_retry"])]
-        component = None
-        pending = None
+        u = g[g["category"] == "uart"]
+        component = {"BLE": None, "ST": None}
+        pending = {"BLE": None, "ST": None}
+        last_notify = None
+
+        def close(bus):
+            pr = pending[bus]
+            if pr is not None:
+                pr["outcome"] = pr.get("outcome") or "no reply"
+                out.append(pr)
+                pending[bus] = None
+
         for _, r in u.iterrows():
             pat, p = r["pattern"], _params(r["params"])
             if pat == "op_start":
-                component = p.get("component")
+                b = _bus_of_component(p.get("component"))
+                if b:
+                    component[b] = p.get("component")
             elif pat == "uart_tx":
-                if pending is not None:
-                    pending["outcome"] = pending.get("outcome") or "no reply"
-                    out.append(pending)
                 b = p["bytes"].split()
-                bus = "BLE" if b[0] == "60" else "ST" if b[0] == "80" else "unknown"
-                pending = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "bus": bus, "component": component, "cmd": b[3] if len(b) > 3 else None,
-                           "tx_bytes": int(p["n_bytes"]), "rx_bytes": np.nan, "rx_ts": pd.NaT, "retcode": None, "outcome": None, "retries": 0}
-            elif pat == "uart_rx" and pending is not None and pd.isna(pending["rx_bytes"]):
-                pending["rx_bytes"] = int(p["n_bytes"])
-                pending["rx_ts"] = r["ts"]
-            elif pat in ("uart_retcode", "uart_retcode_ble_get") and pending is not None:
-                if pat == "uart_retcode" and pending.get("retcode") is None or pat == "uart_retcode_ble_get":
-                    pending["retcode"] = p["retcode"]
-                    pending["outcome"] = "ok" if p["retcode"] == "0001" else f"retcode {p['retcode']}"
-            elif pat == "uart_wait_timeout" and pending is not None:
-                pending["outcome"] = "timeout"
-            elif pat == "uart_mismatch_retry" and pending is not None:
-                pending["retries"] = int(p.get("attempt", 0))
-                pending["outcome"] = pending.get("outcome") or "mismatch retry"
-        if pending is not None:
-            pending["outcome"] = pending.get("outcome") or "no reply"
-            out.append(pending)
-    df = pd.DataFrame(out)
+                bus = _bus_of_bytes(b[0])
+                cmd = b[3] if len(b) > 3 else None
+                if bus == "BLE" and last_notify is not None and last_notify["cmd"] == cmd and r["line_no"] - last_notify["line_no"] <= 6:
+                    last_notify["reply_ts"] = r["ts"]
+                    last_notify["outcome"] = "notification replied"
+                    last_notify = None
+                    continue
+                if bus in pending:
+                    close(bus)
+                    pending[bus] = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "bus": bus, "direction": "request", "component": component.get(bus), "cmd": cmd,
+                                    "tx_bytes": int(p["n_bytes"]), "rx_bytes": np.nan, "rx_ts": pd.NaT, "retcode": None, "outcome": None, "retries": 0}
+            elif pat == "uart_rx":
+                b = p["bytes"].split()
+                bus = _bus_of_bytes(b[0])
+                cmd = b[3] if len(b) > 3 else None
+                pr = pending.get(bus)
+                if pr is not None and pd.isna(pr["rx_bytes"]):
+                    pr["rx_bytes"] = int(p["n_bytes"])
+                    pr["rx_ts"] = r["ts"]
+                    if cmd and pr["cmd"] and cmd != pr["cmd"] and cmd != "FF":
+                        pr["outcome"] = "reply for other command"
+                elif bus == "BLE":
+                    last_notify = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "bus": bus, "direction": "notify", "component": "BLEStatusUpdate", "cmd": cmd,
+                                   "tx_bytes": np.nan, "rx_bytes": int(p["n_bytes"]), "rx_ts": r["ts"], "retcode": None, "outcome": "notification", "retries": 0}
+                    out.append(last_notify)
+            elif pat in ("uart_retcode", "uart_retcode_ble_get"):
+                bus = "BLE" if pat == "uart_retcode_ble_get" else _bus_of_component(p.get("component"))
+                pr = pending.get(bus) if bus else None
+                if pr is not None and (pr["retcode"] is None or pat == "uart_retcode"):
+                    pr["retcode"] = p["retcode"]
+                    pr["outcome"] = "ok" if p["retcode"] == "0001" else f"retcode {p['retcode']}"
+                    if pat == "uart_retcode":
+                        close(bus)
+            elif pat == "uart_wait_timeout":
+                pr = pending.get("ST")
+                if pr is not None:
+                    pr["outcome"] = "timeout"
+            elif pat == "uart_mismatch_retry":
+                bus = _bus_of_component(p.get("component")) or "ST"
+                pr = pending.get(bus)
+                if pr is not None:
+                    pr["retries"] = int(p.get("attempt", 0))
+                    pr["outcome"] = pr.get("outcome") or "mismatch retry"
+        for bus in ("BLE", "ST"):
+            close(bus)
+    df = pd.DataFrame(out).sort_values("line_no").reset_index(drop=True)
     if len(df):
         df["latency_s"] = (df["rx_ts"] - df["ts"]).dt.total_seconds()
-        df["ok"] = df["outcome"] == "ok"
+        df.loc[df["direction"] == "notify", "latency_s"] = np.nan
+        df["ok"] = df["outcome"].isin(["ok", "notification replied"])
     return df
 
 
