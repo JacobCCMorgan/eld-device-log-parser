@@ -200,6 +200,9 @@ def _pct(v):
 
 # ---------------------------------------------------------------- UART round-trips
 
+NOTIFY_REPLY_CMDS = {"23"}  # BLE module status notification; the host answers with the same command code
+
+
 def _bus_of_bytes(first: str) -> str:
     return {"60": "BLE", "06": "BLE", "80": "ST", "08": "ST"}.get(first, "unknown")
 
@@ -222,7 +225,7 @@ def uart_commands(lines: pd.DataFrame) -> pd.DataFrame:
     out = []
     for dev, g in lines.groupby("device_key", sort=False):
         g = g.sort_values("line_no").reset_index(drop=True)
-        u = g[g["category"] == "uart"]
+        u = g[(g["category"] == "uart") | g["pattern"].isin(["uart_wait_timeout", "uart_mismatch_retry"])]
         component = {"BLE": None, "ST": None}
         pending = {"BLE": None, "ST": None}
         last_notify = None
@@ -244,10 +247,14 @@ def uart_commands(lines: pd.DataFrame) -> pd.DataFrame:
                 b = p["bytes"].split()
                 bus = _bus_of_bytes(b[0])
                 cmd = b[3] if len(b) > 3 else None
-                if bus == "BLE" and last_notify is not None and last_notify["cmd"] == cmd and r["line_no"] - last_notify["line_no"] <= 6:
-                    last_notify["reply_ts"] = r["ts"]
-                    last_notify["outcome"] = "notification replied"
-                    last_notify = None
+                if bus == "BLE" and cmd in NOTIFY_REPLY_CMDS:
+                    # the host acknowledges a module status notification; no reply is expected
+                    if last_notify is not None and last_notify["cmd"] == cmd and r["line_no"] - last_notify["line_no"] <= 12:
+                        last_notify["outcome"] = "notification replied"
+                        last_notify = None
+                    else:
+                        out.append({"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "bus": bus, "direction": "notify-reply", "component": "BLEStatusUpdate", "cmd": cmd,
+                                    "tx_bytes": int(p["n_bytes"]), "rx_bytes": np.nan, "rx_ts": pd.NaT, "retcode": None, "outcome": "notification replied", "retries": 0})
                     continue
                 if bus in pending:
                     close(bus)
@@ -258,11 +265,17 @@ def uart_commands(lines: pd.DataFrame) -> pd.DataFrame:
                 bus = _bus_of_bytes(b[0])
                 cmd = b[3] if len(b) > 3 else None
                 pr = pending.get(bus)
+                raw = p["bytes"]
+                coalesced_notify = bus == "BLE" and " 06 05 80 23 " in " " + raw + " " and not raw.startswith("06 05 80 23")
                 if pr is not None and pd.isna(pr["rx_bytes"]):
                     pr["rx_bytes"] = int(p["n_bytes"])
                     pr["rx_ts"] = r["ts"]
                     if cmd and pr["cmd"] and cmd != pr["cmd"] and cmd != "FF":
                         pr["outcome"] = "reply for other command"
+                    if coalesced_notify:  # a module notification rode along in the same UART read
+                        last_notify = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "bus": bus, "direction": "notify", "component": "BLEStatusUpdate", "cmd": "23",
+                                       "tx_bytes": np.nan, "rx_bytes": np.nan, "rx_ts": r["ts"], "retcode": None, "outcome": "notification (coalesced)", "retries": 0}
+                        out.append(last_notify)
                 elif bus == "BLE":
                     last_notify = {"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "bus": bus, "direction": "notify", "component": "BLEStatusUpdate", "cmd": cmd,
                                    "tx_bytes": np.nan, "rx_bytes": int(p["n_bytes"]), "rx_ts": r["ts"], "retcode": None, "outcome": "notification", "retries": 0}
