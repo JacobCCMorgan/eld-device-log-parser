@@ -38,7 +38,12 @@ def boot_sessions(lines: pd.DataFrame) -> pd.DataFrame:
     for dev, g in lines.groupby("device_key", sort=False):
         g = g.sort_values("line_no")
         starts = g[g["pattern"] == "boot_start"]
-        bounds = list(starts["line_no"]) + [g["line_no"].max() + 1]
+        pre = g[g["pattern"].isin(["shell", "boot_version"])]
+        bounds = []
+        for ln in starts["line_no"]:
+            before = pre[(pre["line_no"] < ln) & (pre["line_no"] >= ln - 25)]
+            bounds.append(int(before["line_no"].min()) if len(before) else int(ln))
+        bounds.append(int(g["line_no"].max()) + 1)
         for i, (lo, hi) in enumerate(zip(bounds[:-1], bounds[1:]), start=1):
             seg = g[(g["line_no"] >= lo) & (g["line_no"] < hi)]
             p = {k: None for k in ["version", "rsrp_dbm", "rsrq_db", "snr_db", "net_type", "init_s", "selftest_ms", "wakeup_reason"]}
@@ -99,8 +104,10 @@ def state_transitions(lines: pd.DataFrame) -> pd.DataFrame:
                 reason_pat = before.iloc[-1]["pattern"]
                 reason = TRIGGER_PATTERNS[reason_pat]
                 reason_text = before.iloc[-1]["body"]
-            elif len(boots[(boots["line_no"] < r["line_no"]) & (boots["line_no"] >= r["line_no"] - 400)]):
+            elif state == "Standby" and len(boots[(boots["line_no"] < r["line_no"]) & (boots["line_no"] >= r["line_no"] - 400)]):
                 reason, reason_text = "boot", "[main] System start"
+            elif prev_state == "Standby" and state == "Driving":
+                reason, reason_text = "standby complete (default path)", None
             else:
                 reason, reason_text = "unspecified", None
             out.append({"device_key": dev, "line_no": r["line_no"], "ts": r["ts"], "from_state": prev_state, "to_state": state, "trigger": reason, "trigger_text": reason_text,
