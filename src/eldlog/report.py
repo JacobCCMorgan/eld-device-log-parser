@@ -35,7 +35,7 @@ def fig_timeline(T: dict, out: Path):
         ax.scatter(up["ts"], np.full(len(up), 0.40), marker="|", s=80, color=np.where(up["is_stored"] == 1, "#B5533C", "#1F2933"), lw=0.8, label="MQTT publish")
         er = T["errors"][(T["errors"]["device_key"] == dev) & (T["errors"]["kind"].isin(["ERR event attempt", "MQTT ack timeout", "MQTT connection lost", "ST command timeout"]))]
         ax.scatter(er["ts"], np.full(len(er), 0.22), marker="x", s=18, color="#B5533C", lw=0.8, label="error / timeout")
-        for _, s in T["boot_sessions"][T["boot_sessions"]["device_key"] == dev].iterrows():
+        for _, s in T["boot_sessions"][(T["boot_sessions"]["device_key"] == dev) & (T["boot_sessions"]["boot_observed"])].iterrows():
             ax.axvline(s["start_ts"], color="#1F2933", lw=1, ls="--")
             ax.text(s["start_ts"], 1.0, f" boot{' ' + str(s['version']) if s['version'] else ''}", fontsize=7, va="bottom")
         ax.set_ylim(0, 1.15)
@@ -70,6 +70,7 @@ def fig_cadence_ack(uploads: pd.DataFrame, out: Path):
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.4))
     u = uploads[uploads["mode"].isin([2, 4])].copy()
     u["interval_s"] = u.groupby("device_key")["ts"].diff().dt.total_seconds()
+    u = u[u["state"] == u.groupby("device_key")["state"].shift(1)]
     for state, color, bins in [("Driving", C["Driving"], np.arange(0, 125, 5)), ("Sleeping", C["Sleeping"], np.arange(0, 330, 15))]:
         ax = axes[0] if state == "Driving" else axes[1]
         for dev, g in u[u["state"] == state].groupby("device_key"):
@@ -138,6 +139,7 @@ def fig_ecm(retry: pd.DataFrame, errs: pd.DataFrame, uploads: pd.DataFrame, out:
 def fig_sessions(sessions: pd.DataFrame, out: Path):
     s = sessions.copy()
     s["label"] = s["device_key"].str[-4:] + " #" + s["session"].astype(str)
+    s = s[s["boot_observed"]]
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.2))
     axes[0].bar(s["label"], s["duration_s"] / 60, color=np.where(s["duration_s"] < 900, "#B5533C", "#2F5D8A"))
     axes[0].set_title("Session length (minutes); red = under 15 min")
@@ -205,8 +207,8 @@ Computed by `eldlog report`; every number is regenerated from the two published 
 
 | device | vehicle (from the foundation tables) | log window (UTC) | lines | boots | publishes |
 |---|---|---|---:|---:|---:|
-| `{dev1}` | 2020 Freightliner, customer unit, J1939 | {s1.loc[s1.device_key == dev1, 'start_ts'].min():%Y-%m-%d %H:%M} to {s1.loc[s1.device_key == dev1, 'end_ts'].max():%H:%M} | {int(comp.loc[comp.device_key == dev1, 'lines'].sum()):,} | {len(d1)} | {int(ack.loc[dev1, 'publishes'])} |
-| `{dev2}` | 2025 passenger vehicle, vendor test unit, OBD-II | {s1.loc[s1.device_key == dev2, 'start_ts'].min():%Y-%m-%d %H:%M} to {s1.loc[s1.device_key == dev2, 'end_ts'].max():%H:%M} | {int(comp.loc[comp.device_key == dev2, 'lines'].sum()):,} | {len(s1[s1.device_key == dev2])} | {int(ack.loc[dev2, 'publishes'])} |
+| `{dev1}` | {ctx['vehicle'].get(dev1, '')} | {s1.loc[s1.device_key == dev1, 'start_ts'].min():%Y-%m-%d %H:%M} to {s1.loc[s1.device_key == dev1, 'end_ts'].max():%H:%M} | {int(comp.loc[comp.device_key == dev1, 'lines'].sum()):,} | {int(d1['boot_observed'].sum())} | {int(ack.loc[dev1, 'publishes'])} |
+| `{dev2}` | {ctx['vehicle'].get(dev2, '')} | {s1.loc[s1.device_key == dev2, 'start_ts'].min():%Y-%m-%d %H:%M} to {s1.loc[s1.device_key == dev2, 'end_ts'].max():%H:%M} | {int(comp.loc[comp.device_key == dev2, 'lines'].sum()):,} | {int(s1.loc[s1.device_key == dev2, 'boot_observed'].sum())} | {int(ack.loc[dev2, 'publishes'])} |
 
 The parser classifies **100 % of the {tot_lines:,} lines** with {ctx['n_patterns']} hand-written patterns in 14 families and turns them into nine event tables (`reports/tables/`).
 
@@ -224,7 +226,7 @@ The parser classifies **100 % of the {tot_lines:,} lines** with {ctx['n_patterns
 
 - The state machine behaves as documented: **Standby at boot, then Driving, and Sleeping once GPS speed is below 8 km/h with speed and RPM idle**; the device wakes to Driving on RPM or speed. `{dev1}` spent {st.loc[(st.device_key == dev1) & (st.state == 'Sleeping'), 'share_of_observed_time'].iloc[0]:.0%} of the observed time Sleeping, `{dev2}` {st.loc[(st.device_key == dev2) & (st.state == 'Sleeping'), 'share_of_observed_time'].iloc[0]:.0%}.
 - **`{dev1}` rebooted {len(d1) - 1} times in {(d1['end_ts'].max() - d1['start_ts'].min()).total_seconds() / 3600:.1f} hours.** One reboot was the over-the-air update from {d1['version'].iloc[0]} to {d1['version'].iloc[-1]} (Upgrade state lasted {ota_dur:.0f} s, upload before and after, UPS output "Success"). The other {len(d1) - 2} were not announced: the log ends mid-cycle in Sleeping and the next lines are the boot shell scripts. {len(short)} of the sessions lasted under 15 minutes, all right after the update; the wake-up reason codes the ST controller reports are {', '.join(d1['wakeup_reason'].astype(str))}. Whether this is a post-update watchdog loop or external power cycling cannot be decided from one device; it is the first thing to check on the fleet after a firmware rollout.
-- Boot is fast and consistent: {d1['init_s'].mean():.0f} s init, {d1['selftest_ms'].mean():.0f} ms self-test, MQTT connected {d1['mqtt_connect_s'].median():.0f} s after boot, first publish after {d1['first_publish_s'].median():.0f} s (median). LTE RSRP at boot ranged {int(s1['rsrp_dbm'].min())} to {int(s1['rsrp_dbm'].max())} dBm.
+- Boot is fast and consistent: {d1['init_s'].mean():.0f} s init, {d1['selftest_ms'].mean():.0f} ms self-test, MQTT connected {d1['mqtt_connect_s'].median():.0f} s after boot, first publish {d1['first_publish_s'].min():.0f} to {d1['first_publish_s'].max():.0f} s after boot (the longer waits are the Standby flow retrying until GPS and ECM are ready). LTE RSRP at boot ranged {int(d1['rsrp_dbm'].min())} to {int(d1['rsrp_dbm'].max())} dBm.
 - The VIN is not available until the engine answers: the first publish carrying a VIN came {first_vin[dev1]:.0f} min after the first publish on `{dev1}` and {first_vin[dev2]:.0f} min on `{dev2}`; until then payloads carry the placeholder, which is what the foundation tables count as "never read a VIN".
 
 ![sessions](figures/06_sessions.png)

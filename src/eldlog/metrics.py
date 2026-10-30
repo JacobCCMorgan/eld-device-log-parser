@@ -21,7 +21,8 @@ def publish_cadence(uploads: pd.DataFrame) -> pd.DataFrame:
     """Interval between consecutive telemetry publishes by state (mode 2 driving, mode 4 sleeping)."""
     u = uploads[uploads["mode"].isin([2, 4])].copy()
     u["interval_s"] = u.groupby(["device_key"])["ts"].diff().dt.total_seconds()
-    u = u[u["state"].isin(["Driving", "Sleeping"])]
+    same_state = u["state"] == u.groupby("device_key")["state"].shift(1)
+    u = u[u["state"].isin(["Driving", "Sleeping"]) & same_state]  # intervals within a state visit only
     g = u.groupby(["device_key", "state"])["interval_s"].agg(n="size", median="median", p10=lambda s: _q(s, 0.1), p90=lambda s: _q(s, 0.9), max="max").reset_index()
     return g
 

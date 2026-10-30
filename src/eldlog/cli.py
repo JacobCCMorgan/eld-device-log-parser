@@ -18,6 +18,9 @@ from .parse import coverage, parse_many
 from .patterns import PATTERNS
 from .tables import build_all
 
+# context from the telematics-data-foundation dimension tables (dim_device / dim_vehicle), looked up by device_key
+VEHICLE_NOTES = {"DEV-40f3ef472c": "2020 Freightliner, customer unit, J1939 bus", "DEV-ada95db42a": "2025 passenger vehicle, vendor test unit, OBD-II build"}
+
 
 def _write_tables(T: dict[str, pd.DataFrame], out: Path):
     out.mkdir(parents=True, exist_ok=True)
@@ -67,7 +70,7 @@ def cmd_report(paths: list[str], out: Path, sim_th: float = 0.4) -> dict:
     report.fig_sessions(T["boot_sessions"], fig_dir)
     report.fig_drain(by_cluster, len(PATTERNS), fig_dir)
     ctx = {"metrics": M, "tables": T, "drain": dr, "drain_clusters": by_cluster, "n_patterns": len(PATTERNS), "by_cmd": by_cmd,
-           "dev1": devs[0], "dev2": devs[1] if len(devs) > 1 else devs[0]}
+           "dev1": devs[0], "dev2": devs[1] if len(devs) > 1 else devs[0], "vehicle": VEHICLE_NOTES}
     report.write_report(out / "firmware_log_report.md", ctx)
     summary = {"lines": int(len(lines)), "patterns": len(PATTERNS), "devices": devs, "coverage_unparsed": int((lines["category"] == "other").sum()),
                "tables": {k: int(len(v)) for k, v in T.items()}, "drain": dr,

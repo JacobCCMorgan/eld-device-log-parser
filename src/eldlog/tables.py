@@ -43,6 +43,10 @@ def boot_sessions(lines: pd.DataFrame) -> pd.DataFrame:
         for ln in starts["line_no"]:
             before = pre[(pre["line_no"] < ln) & (pre["line_no"] >= ln - 25)]
             bounds.append(int(before["line_no"].min()) if len(before) else int(ln))
+        boot_observed = [True] * len(bounds)
+        if not bounds or bounds[0] > int(g["line_no"].min()):
+            bounds.insert(0, int(g["line_no"].min()))  # the file starts inside a running session
+            boot_observed.insert(0, False)
         bounds.append(int(g["line_no"].max()) + 1)
         for i, (lo, hi) in enumerate(zip(bounds[:-1], bounds[1:]), start=1):
             seg = g[(g["line_no"] >= lo) & (g["line_no"] < hi)]
@@ -74,7 +78,7 @@ def boot_sessions(lines: pd.DataFrame) -> pd.DataFrame:
                 p["wakeup_reason"] = _params(wk.iloc[0]["params"]).get("value")
             first_pub = seg[seg["pattern"] == "mqtt_pub_payload"]
             conn = seg[seg["pattern"] == "mqtt_connected"]
-            out.append({"device_key": dev, "session": i, "start_ts": seg["ts"].min(), "end_ts": seg["ts"].max(), "lines": len(seg),
+            out.append({"device_key": dev, "session": i, "boot_observed": boot_observed[i - 1], "start_ts": seg["ts"].min(), "end_ts": seg["ts"].max(), "lines": len(seg),
                         "duration_s": (seg["ts"].max() - seg["ts"].min()).total_seconds(),
                         "mqtt_connect_s": (conn["ts"].iloc[0] - seg["ts"].min()).total_seconds() if len(conn) else np.nan,
                         "first_publish_s": (first_pub["ts"].iloc[0] - seg["ts"].min()).total_seconds() if len(first_pub) else np.nan,
