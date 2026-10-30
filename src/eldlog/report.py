@@ -35,16 +35,19 @@ def fig_timeline(T: dict, out: Path):
         ax.scatter(up["ts"], np.full(len(up), 0.40), marker="|", s=80, color=np.where(up["is_stored"] == 1, "#B5533C", "#1F2933"), lw=0.8, label="MQTT publish")
         er = T["errors"][(T["errors"]["device_key"] == dev) & (T["errors"]["kind"].isin(["ERR event attempt", "MQTT ack timeout", "MQTT connection lost", "ST command timeout"]))]
         ax.scatter(er["ts"], np.full(len(er), 0.22), marker="x", s=18, color="#B5533C", lw=0.8, label="error / timeout")
-        for _, s in T["boot_sessions"][(T["boot_sessions"]["device_key"] == dev) & (T["boot_sessions"]["boot_observed"])].iterrows():
+        prev_version = None
+        for k, (_, s) in enumerate(T["boot_sessions"][(T["boot_sessions"]["device_key"] == dev) & (T["boot_sessions"]["boot_observed"])].iterrows()):
             ax.axvline(s["start_ts"], color="#1F2933", lw=1, ls="--")
-            ax.text(s["start_ts"], 1.0, f" boot{' ' + str(s['version']) if s['version'] else ''}", fontsize=7, va="bottom")
-        ax.set_ylim(0, 1.15)
+            label = " boot" + (f" {s['version']}" if s["version"] and s["version"] != prev_version else "")
+            ax.text(s["start_ts"], 1.0 + 0.09 * (k % 2), label, fontsize=7, va="bottom")
+            prev_version = s["version"] or prev_version
+        ax.set_ylim(0, 1.22)
         ax.set_yticks([0.22, 0.40, 0.75], ["errors", "publishes", "state"])
         ax.set_title(f"{dev}: {tr['ts'].min():%Y-%m-%d %H:%M} to {end_all:%H:%M} UTC", fontsize=10, loc="left")
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
         ax.spines[["top", "right"]].set_visible(False)
     handles = [plt.Rectangle((0, 0), 1, 1, color=C[k]) for k in ["Standby", "Driving", "Sleeping", "Upgrade"]]
-    axes[0, 0].legend(handles, ["Standby", "Driving", "Sleeping", "Upgrade"], loc="upper right", fontsize=8, frameon=False, ncol=4)
+    axes[0, 0].legend(handles, ["Standby", "Driving", "Sleeping", "Upgrade"], loc="lower right", fontsize=8, frameon=False, ncol=4)
     _save(fig, out / "01_timeline.png")
 
 
@@ -86,7 +89,7 @@ def fig_cadence_ack(uploads: pd.DataFrame, out: Path):
     ax.bar(labels, counts.values, color=["#B5533C" if k < 0 else "#2F5D8A" for k in counts.index])
     for i, v in enumerate(counts.values):
         ax.text(i, v + 2, str(v), ha="center", fontsize=8)
-    ax.set_title("Time from publish to backend ack (1 s log resolution)")
+    ax.set_title("Publish-to-ack time (1 s log resolution)")
     ax.spines[["top", "right"]].set_visible(False)
     _save(fig, out / "03_cadence_and_ack.png")
 
@@ -123,13 +126,16 @@ def fig_ecm(retry: pd.DataFrame, errs: pd.DataFrame, uploads: pd.DataFrame, out:
     axes[0].legend(frameon=False, fontsize=8)
     ev = errs[errs["kind"] == "ERR event attempt"]
     pub = uploads[uploads["msg_code"].notna()]
+    t0 = uploads.groupby("device_key")["ts"].min()
     for dev, g in ev.groupby("device_key"):
-        axes[1].scatter(g["ts"], g["gps_speed"], marker="x", color="#B5533C", label=f"{dev}: ERR005 condition met ({len(g)})")
+        x = (g["ts"] - t0[dev]).dt.total_seconds() / 60
+        axes[1].scatter(x, g["gps_speed"], marker="x", color="#B5533C", label=f"{dev}: ERR005 condition met ({len(g)})")
     for dev, g in pub.groupby("device_key"):
-        axes[1].scatter(g["ts"], np.full(len(g), 2), marker="^", s=60, color="#1F2933", label=f"{dev}: event actually published ({len(g)})")
+        x = (g["ts"] - t0[dev]).dt.total_seconds() / 60
+        axes[1].scatter(x, np.full(len(g), 2), marker="^", s=70, color="#1F2933", label=f"{dev}: event published ({len(g)}: {', '.join(sorted(set(g['msg_code'])))})")
     axes[1].set_ylabel("GPS speed at the time (km/h)")
-    axes[1].set_title("ERR005 attempts vs published events (one-hour cooldown)")
-    axes[1].xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
+    axes[1].set_xlabel("minutes since the device's first publish in the log")
+    axes[1].set_title("ERR005 condition met vs events published (1 h cooldown)")
     axes[1].legend(frameon=False, fontsize=7)
     for ax in axes:
         ax.spines[["top", "right"]].set_visible(False)
@@ -239,7 +245,7 @@ The parser classifies **100 % of the {tot_lines:,} lines** with {ctx['n_patterns
 
 - **Driving telemetry is published every 30 s and sleeping status every 5 min**, exactly as specified; the long maxima are the reconnection gaps discussed below.
 - **{int(ack['acked'].sum())} of {int(ack['publishes'].sum())} publishes were acknowledged by the backend, {ack['ack_within_1s_rate'].min():.0%} or more of them within one second** (the log has one-second resolution, so this is an upper bound on latency). The backend REST calls made at boot take about {T['api_calls']['latency_ms'].median():.0f} ms each by comparison.
-- **The offline path works end to end.** Three publishes were never acknowledged: each coincided with a `connection reset by peer` from the broker, the device waited 5 s (`WaitForAck` timeout), wrote the record to the re-upload folder, reconnected, re-sent it with `is_stored = 1` and received an acknowledgement that names the original payload timestamp. Delivery delay for the three records: {', '.join(f"{x:.0f}" for x in rec['delivery_delay_s'])} s. No record was lost and no record was duplicated at the broker (the original publish had no ack).
+- **The offline path works end to end.** Of the {int(ack['publishes'].sum() - ack['acked'].sum())} unacknowledged publishes one is the device's own acknowledgement of the OTA command, which expects no reply. The other {len(rec)} were telemetry: each coincided with a `connection reset by peer` from the broker, the device waited 5 s (`WaitForAck` timeout), wrote the record to the re-upload folder, reconnected, re-sent it with `is_stored = 1` and received an acknowledgement that names the original payload timestamp. Delivery delay for the three records: {', '.join(f"{x:.0f}" for x in rec['delivery_delay_s'])} s. No record was lost and no record was duplicated at the broker (the original publish had no ack).
 
 ![cadence](figures/03_cadence_and_ack.png)
 
