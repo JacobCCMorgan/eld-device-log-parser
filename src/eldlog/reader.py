@@ -15,10 +15,10 @@ from __future__ import annotations
 
 import gzip
 import re
+from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Iterator
 
 PREFIX = re.compile(r"^(?P<level>[A-Za-z]+)\s*:(?P<ts>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) ?(?P<body>.*)$")
 DEVICE_IN_NAME = re.compile(r"(DEV-[0-9a-f]{10})")

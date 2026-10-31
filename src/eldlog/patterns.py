@@ -115,14 +115,13 @@ _P: list[tuple[str, str, str]] = [
     ("api_body", "boot", r"^\[International API Send\] Response Body:"),
     ("api_misc", "boot", r"^\[(?:International API|Login|GetTime|GetInfo|time sync)\]"),
     ("server_time", "boot", r"^Server time: (?P<value>\d+)$"),
+    ("housekeeping", "housekeeping", r"^\[(?:CompressLog|CleanOldDateFiles)\]|^\[(?:main|Sleeping|Standby)\] (?:clear tarlogs|Log compression ok|log rotation done)|^\[main\]\s+\d+ [KM]iB |^\[main\] /data|^\[main\]/data main usage"),
     ("init_misc", "boot", r"^\[(?:init|init start|main|NewRS232|TestModeGet|SourceAddressSet|STWakeupGet|CarInfoGet|network check|FreeMem)\]"),
     ("config_dump", "boot", r"^(?:Console:ON|LogSizek: \d+|LogTar: \d+|Rs232ST:\S+|Rs232BLE:\S+)$"),
     ("shell", "boot", r"^\[(?:restore|change_user|rc)\.sh\]"),
     ("simswap", "boot", r"^SIMSWAP"),
     # ---- OTA
     ("ota", "ota", r"^\[(?:main-ota|Upgrade|OTA)\]|^run: /data/APP/upgrade"),
-    # ---- housekeeping
-    ("housekeeping", "housekeeping", r"^\[(?:CompressLog|CleanOldDateFiles)\]|^\[(?:main|Sleeping|Standby)\] (?:clear tarlogs|Log compression ok|log rotation done)|^\[main\]\s+\d+ [KM]iB |^\[main\] /data|^\[main\]/data main usage"),
     # ---- unidentified driving
     ("ud", "ud", r"^\[Driving\]\[UD\]"),
 ]

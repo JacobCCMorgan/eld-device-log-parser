@@ -234,7 +234,7 @@ def uart_commands(lines: pd.DataFrame) -> pd.DataFrame:
         pending = {"BLE": None, "ST": None}
         last_notify = None
 
-        def close(bus):
+        def close(bus, pending=pending):
             pr = pending[bus]
             if pr is not None:
                 pr["outcome"] = pr.get("outcome") or "no reply"
