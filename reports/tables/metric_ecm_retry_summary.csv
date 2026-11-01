@@ -1,0 +1,8 @@
+device_key,state,publishes,ecm_retry_lines,cycles_with_retry,engine_hour_na_share,vin_empty_share,rpm_na_share
+DEV-40f3ef472c,Driving,202,8,8,0.02030456852791878,0.02030456852791878,0.0
+DEV-40f3ef472c,Sleeping,29,168,168,0.5694444444444444,0.5416666666666666,0.020833333333333332
+DEV-40f3ef472c,Standby,6,4,4,1.0,1.0,0.0
+DEV-40f3ef472c,Upgrade,0,0,0,,,
+DEV-40f3ef472c,main,0,0,0,,,
+DEV-ada95db42a,Driving,45,84,84,1.0,0.0,0.0
+DEV-ada95db42a,Sleeping,11,18,18,1.0,0.0,0.0

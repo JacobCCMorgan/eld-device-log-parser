@@ -1,0 +1,5 @@
+device_key,bus,requests,ok,timeouts,no_reply,reply_within_1s,reply_p50_s,reply_max_s,ok_rate
+DEV-40f3ef472c,BLE,3073,3073,0,0,3073,0.0,1.0,1.0
+DEV-40f3ef472c,ST,3913,3877,35,0,3913,0.0,1.0,0.990799897776642
+DEV-ada95db42a,BLE,501,501,0,0,501,0.0,1.0,1.0
+DEV-ada95db42a,ST,1111,1096,15,0,1111,0.0,1.0,0.9864986498649865

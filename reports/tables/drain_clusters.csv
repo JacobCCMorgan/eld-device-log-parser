@@ -1,0 +1,317 @@
+cluster_id,lines,template,majority_category,purity,registry_patterns
+27,8862,Send_data[<NUM> byte]: <HEX>,uart,1.0,1
+29,8638,Read_data[<NUM> byte]: <HEX>,uart,1.0,1
+100,5058,[STMessageGet] cmd: <*>,uart,1.0,1
+30,3837,[BLEMessageGet]cmd: <NUM>,uart,1.0,1
+31,3837,[BLEMessageGet]Retcode: <NUM>,uart,1.0,1
+12,2346,***************************************************,separator,1.0,1
+126,1860,[BLELedSet] set LED color start....,uart,1.0,1
+127,1860,[BLELedSet] Retcode: <NUM>,uart,1.0,1
+203,1691,[Driving][query <*> data] <*>,telemetry,1.0,1
+124,1599,[RuntimeLED][channel] command: <*>,led,1.0,1
+118,1599,[control LED][controlLED] start...,led,1.0,1
+226,1518,[Sleeping][query <*> data] <*>,telemetry,1.0,1
+106,1125,[SelfTest] device self-test <*>,boot,1.0,1
+201,962,[Driving][query ECM <*> <*> <*>,telemetry,1.0,1
+224,761,[Sleeping][query ECM <*> <*> <*>,telemetry,1.0,1
+113,696,fwVersion: <*>,uart,1.0,1
+163,676,[STECMDataGet] Retcode: <NUM>,uart,1.0,1
+162,676,[STECMDataGet] query ECM data start....,uart,1.0,1
+164,676,ECMData: <HEX>,uart,1.0,1
+3,633,<BLANK>,separator,1.0,1
+84,614,[MQTT <*>,mqtt,1.0,3
+129,605,[MQTT <*> <*> message <*>,mqtt,1.0,2
+229,604,[Sleeping][query battery <*> <*> <*>,telemetry,1.0,1
+228,604,[Sleeping][query GPS <*> GPS <*>,telemetry,1.0,1
+130,602,=============================================================,separator,1.0,1
+135,567,[STBattery<NUM>VCheck]BatteryCheck: <NUM>,uart,1.0,1
+133,567,[STBattery<NUM>VCheck] query <NUM>V battery present start....,uart,1.0,1
+132,567,[CarInfoGet]Start...,boot,1.0,1
+134,567,[STBattery<NUM>VCheck] Retcode: <NUM>,uart,1.0,1
+182,565,[STBatteryCheck] Retcode: <NUM>,uart,1.0,1
+172,565,GPSValid: <NUM>,uart,1.0,1
+158,565,[STECMProtocolGet] query ECM protocol start....,uart,1.0,1
+160,565,ECMProtocol: <NUM>,uart,1.0,1
+159,565,[STECMProtocolGet] Retcode: <NUM>,uart,1.0,1
+171,565,[STGPSValidGet] Retcode: <NUM>,uart,1.0,1
+170,565,[STGPSValidGet] query GPS status start....,uart,1.0,1
+185,565,[STBatteryDataGet] query battery data start....,uart,1.0,1
+187,565,BatteryData: <HEX>,uart,1.0,1
+186,565,[STBatteryDataGet] Retcode: <NUM>,uart,1.0,1
+181,565,[STBatteryCheck] query battery present start....,uart,1.0,1
+183,565,BatteryCheck: <NUM>,uart,1.0,1
+177,563,[read][/config/gpsLatitude]: <NUM>,config,1.0,1
+176,563,GPSData: <HEX>,uart,1.0,1
+180,563,[write][/config/gpsLongitude]: <NUM>,config,1.0,1
+114,563,[SelfTest][device self-test]Check <NUM>g,boot,1.0,1
+179,563,[write][/config/gpsLatitude]: <NUM>,config,1.0,1
+174,563,[STGPSDataGet] query GPS data start....,uart,1.0,1
+178,563,[read][/config/gpsLongitude]: <NUM>,config,1.0,1
+175,563,[STGPSDataGet] Retcode: <NUM>,uart,1.0,1
+116,562,[SelfTest][device self-test]state: <NUM>,boot,1.0,1
+115,558,[network check]:,boot,1.0,1
+117,554,[SelfTest]:<NUM>ms,boot,1.0,1
+209,547,[SourceMileageListGet] Retcode: <NUM>,uart,1.0,1
+210,547,[SourceMileageListGet]Data: <*>,uart,1.0,1
+208,547,[SourceMileageListGet] query source mileage list start....,uart,1.0,1
+193,544,[BLETemperatureGet] Retcode: <NUM>,uart,1.0,1
+192,544,[BLETemperatureGet] read ELD temperature start....,uart,1.0,1
+194,544,[BLETemperatureGet]Temperature: <NUM>,uart,1.0,1
+206,490,[Driving][query battery <*> <*> <*>,telemetry,1.0,1
+205,490,[Driving][query GPS <*> GPS <*>,telemetry,1.0,1
+74,404,[BleBroadcast] <*> <*> <*> done,ble,1.0,1
+168,393,[read][/config/engineMile]: <NUM>,config,1.0,1
+169,393,[write][/config/engineMile]: <NUM>,config,1.0,1
+109,348,[BLEFWVersionGet]fwVersion: MS<NUM>_BLE_v<NUM>_<NUM>_r<NUM>,uart,1.0,1
+111,348,[STFWVersionGet] get firmware version start....,uart,1.0,1
+108,348,[BLEFWVersionGet] Retcode: <NUM>,uart,1.0,1
+112,348,[STFWVersionGet] Retcode: <NUM>,uart,1.0,1
+107,348,[BLEFWVersionGet] get firmware version start....,uart,1.0,1
+243,310,[read][/config/vinID]: <ID>,config,1.0,1
+105,305,[FreeMem] sync,boot,1.0,1
+230,302,[Sleeping][query <NUM>V battery present] <NUM>V battery status:<NUM>,telemetry,1.0,1
+231,302,[Sleeping][query source mileage list] source mileage list ret=<NUM> <*>,telemetry,1.0,1
+190,301,[write][/config/engineHour]: <*>,config,1.0,1
+131,300,[MQTT messageHandler] forward topic=MProd/S/<ID>/ack -> <*> <*> <*> <*>,mqtt,1.0,1
+234,293,[Sleeping] timezone: <NUM>:<NUM>,telemetry,1.0,1
+232,293,[Sleeping][query ELD temperature] ELDTemperature:<NUM>,telemetry,1.0,1
+233,293,[Sleeping]/data free space: <NUM>%,telemetry,1.0,1
+39,270,[BLEAdvertisOnOff] enable / disable BLE advertising start....,uart,1.0,1
+66,269,[BLEAdvertisOnOff] Retcode: <NUM>,uart,1.0,1
+83,264,"[BLEStatusUpdate] received module status notification, responding",ble,1.0,1
+82,264,[BLEStatusUpdate]BLE not connected Trailer GPS,ble,1.0,1
+80,264,[BLEStatusUpdate] module status notification start....,uart,1.0,1
+289,257,[BLEMessageGet] UART read contained <NUM> frames (notify+reply coalesced frames split),uart,1.0,1
+213,246,[Driving] timezone: <NUM>:<NUM>,telemetry,1.0,1
+200,245,[read][/config/USN]: <NUM>,config,1.0,1
+211,245,[Driving][query source mileage list] source mileage list ret=<NUM> <*>,telemetry,1.0,1
+212,245,[Driving][query ELD temperature] ELDTemperature:<NUM>,telemetry,1.0,1
+207,245,[Driving][query <NUM>V battery present] <NUM>V battery status:<NUM>,telemetry,1.0,1
+215,245,[write][/config/USN]: <NUM>,config,1.0,1
+204,239,[Driving][query ECM data] ECM CAN ID:<NUM>,telemetry,1.0,1
+242,231,[Driving] upload to backend,state,1.0,1
+225,186,"[Sleeping][query ECM data] ECM data contains N/A or VIN not ready, retry (<NUM>/<NUM>)",telemetry,1.0,1
+287,168,"[MQTT messageHandler] received <*> ack topic=MProd/S/<ID>/ack, forwarding to <*>",mqtt,1.0,2
+227,153,[Sleeping][query ECM data] ECM CAN ID:<NUM>,telemetry,1.0,1
+141,144,[main] <NUM> <*> <*>,housekeeping,1.0,1
+67,135,[BleBroadcast] BLE advertising disabled,ble,1.0,1
+72,135,[BLEDeviceNameGet] Retcode: <NUM>,uart,1.0,1
+71,135,[BLEDeviceNameGet] get BLE device name start....,uart,1.0,1
+68,135,[BLEDeviceNameSet] set BLE device name start....,uart,1.0,1
+70,135,[BLEDeviceNameSet] Retcode: <NUM>,uart,1.0,1
+69,135,[BLEDeviceNameSet]deviceName: RTHA<NUM> <ID>,uart,1.0,1
+73,135,[BLEDeviceNameGet]bleDeviceName: RTHA<NUM> <ID>,uart,1.0,1
+76,135,[BLEStatusUpdateSet] Retcode: <NUM>,uart,1.0,1
+81,135,[BLEStatusUpdate]APP advertising enabled,ble,1.0,1
+75,135,[BLEStatusUpdateSet] set module status notification start....,uart,1.0,1
+79,135,[BLEAdvertisSetting] Retcode: <NUM>,uart,1.0,1
+78,135,[BLEAdvertisSetting] set BLE advertising parameters start....,uart,1.0,1
+77,135,[BleBroadcast] module status notification set done,ble,1.0,1
+38,134,[enable BLE advertising]Start...,ble,1.0,1
+290,129,[BLEStatusUpdate]BLE not connected APP,ble,1.0,1
+288,128,"[BleBroadcast] for <NUM> s not connected, re-enable BLE advertising",ble,1.0,1
+202,92,"[Driving][query ECM data] ECM data contains N/A or VIN not ready, retry (<NUM>/<NUM>)",telemetry,1.0,1
+48,72,[read][/config/sourceAddr]: <NUM>,config,1.0,1
+295,61,"[Driving] Speed=<NUM>(contains N/A/ empty value) and GPS vehicle speed < <NUM> km/h has lasted more than <NUM> s, attempt OTA flow",state,1.0,1
+166,58,[Standby][query <*> data] <*>,telemetry,1.0,1
+303,50,"[Driving][UD] write UDLog contents (added / update):<NUM>,<NUM>",ud,1.0,1
+237,50,"[WaitSTCmdReply] want cmd <NUM> timeout, use spilled FF ret=<NUM> for cmd-mismatch retry",error,1.0,1
+304,50,[Driving][UD] <NUM>h within window UD window total seconds:<NUM>,ud,1.0,1
+189,46,[read][/config/engineHour]: <*>,config,1.0,1
+312,44,[read][/config/sourceAddr]:,config,1.0,1
+235,41,[Sleeping] upload to backend,state,1.0,1
+241,40,"[Driving] EngineHour is N/A, compensated from file for upload <NUM> (cumulative compensated seconds =<NUM>)",state,1.0,1
+156,37,[write][/config/groupNo]: <NUM>,config,1.0,1
+184,36,[Standby][query battery <*> <*> <*>,telemetry,1.0,1
+173,34,[Standby][query GPS <*> GPS <*>,telemetry,1.0,1
+2,28,[change_user.sh] <*> md<NUM> ok <*>,boot,1.0,1
+87,28,[International API Send] <*> <*> <*>,boot,1.0,2
+94,24,-----------------------------------------,separator,1.0,1
+28,24,[init <*> start...,boot,1.0,1
+161,24,[Standby][query ECM <*> <*> <*>,telemetry,1.0,1
+292,22,[NotifyECMAutoNoDetected] ECM Auto No Detected start....,error,1.0,1
+313,22,"/work/iot/src/main/Controller/controller_driving.go:<NUM>: [Driving] got GPS Speed (<NUM>) but ECM field contains N/A, send ERR<NUM>",error,1.0,1
+314,21,"[sendECMDeviceEvent] skip ERR<NUM>, cooldown <*>",error,1.0,1
+144,20,[CompressLog] Log date filter done,housekeeping,1.0,1
+142,18,"[main] <*> contents (largest first, max <NUM> records):",housekeeping,1.0,1
+188,18,[Standby][query <NUM>V battery present] <NUM>V battery status:<NUM>,telemetry,1.0,1
+221,16,"[CompressLog] <NUM><NUM><NUM>.log no new content, keeping existing <NUM><NUM><NUM>.tar.gz, clear plaintext date log",housekeeping,1.0,1
+220,16,"[CompressLog] no content older than yesterday, not keeping empty <NUM><NUM><NUM>.log",housekeeping,1.0,1
+199,15,[Driving] driving mode flow start...,state,1.0,1
+53,14,*******************MQTT.json*******************,separator,1.0,1
+1,14,"[restore.sh] <*> md<NUM> is same, skip.",boot,1.0,1
+219,14,[Sleeping] clear tarlogs/sys leftover compression temp,housekeeping,1.0,1
+218,14,[Sleeping] upload status to backend,state,1.0,1
+217,14,[Sleeping] sleeping mode flow start...,state,1.0,1
+214,14,[Driving] upload to backend before sleep,state,1.0,1
+223,14,[Sleeping] log rotation done,housekeeping,1.0,1
+222,14,[Sleeping] Log compression ok,housekeeping,1.0,1
+5,12,*******************config.json*******************,separator,1.0,1
+62,12,[CreateMQTT] handle MQTT Client <*> <*>,mqtt,1.0,1
+14,12,[NewRS<NUM>]Create rs<NUM> succeed,boot,1.0,1
+110,12,[SelfTest][device self-test] <*> version: <*>,boot,1.0,1
+285,12,"[Standby] before first upload GPS/ECM not ready (GPSValid=<NUM> ECMProtocol=<NUM>), <NUM> s then retry (<NUM>/<NUM>)",state,1.0,1
+191,10,"[Standby] <*> is N/A, compensated from file for upload <NUM>",state,1.0,1
+238,9,"[STECMDataGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+244,9,"[STBatteryCheck] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+85,9,[MQTT connectHandler]--- subscribe topics after connect:,mqtt,1.0,1
+86,9,[MQTT connectHandler] subscribe topic: MProd/S/<ID>/#,mqtt,1.0,1
+247,8,[NotifyECMEngineMileTimeout] ECM Engine Mile Timeout start....,error,1.0,1
+250,8,[NotifyECMEngineMileTimeout] [<NUM>] [timeout] CAN <*> sourceAddr=<NUM> Engine Mile=<NUM> km <*>,error,1.0,1
+249,8,[NotifyECMEngineMileTimeout] [<NUM>] CAN <*> sourceAddr=<NUM> Engine Mile=<NUM> km <*>,error,1.0,1
+236,8,[SelfTest]:<NUM>s,boot,1.0,1
+255,8,SIMSWAP and set <carrier> APN start...,boot,1.0,1
+254,8,[SelfTest][device self-test]:<NUM>g fail,error,1.0,1
+253,8,/work/iot/src/main/Lib/shell.go:<NUM>: [network check]error: exit status <NUM>,error,1.0,1
+248,8,[NotifyECMEngineMileTimeout] Count=<NUM> TimeoutIdx=<NUM>,error,1.0,1
+145,8,"[CompressLog] <*> compression <*> size: <NUM> bytes (~<NUM> KiB), merged <*> <*> <*> <NUM> bytes (~<NUM> KiB)",housekeeping,1.0,1
+216,8,"[Driving]GPS vehicle speed below <NUM> km/h and Speed and RPM are both N/A or <NUM>, system will enter sleeping mode",state,1.0,1
+52,7,[GetMQTTConfigJson] read MQTT config file and compare URL,mqtt,1.0,1
+57,7,Sub: MProd/S/<ID>,mqtt,1.0,1
+56,7,PingTimeoutTime: <NUM>,mqtt,1.0,1
+239,7,"[STECMProtocolGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+58,7,Pub: MProd/ELD/<ID>,mqtt,1.0,1
+54,7,Url: <url>,mqtt,1.0,1
+55,7,KeepAliveTime: <NUM>,mqtt,1.0,1
+11,6,[main] System start...,boot,1.0,1
+10,6,Rs<NUM>BLE:/dev/ttyHS<NUM>,boot,1.0,1
+15,6,[init]InitST succeed,boot,1.0,1
+16,6,[init]InitBLE succeed,boot,1.0,1
+17,6,[init]Start <NUM>g,boot,1.0,1
+13,6,[init] Initial start,boot,1.0,1
+19,6,"[Get<NUM>GInfor]ICCID value: <ID>, len: <NUM>",boot,1.0,1
+20,6,"[Get<NUM>GInfor]RSRP value: <NUM>dBm, len: <NUM>",boot,1.0,1
+21,6,"[Get<NUM>GInfor]RSRQ value: <NUM>dBm, len: <NUM>",boot,1.0,1
+22,6,"[Get<NUM>GInfor]SNR value: <NUM>dBm, len: <NUM>",boot,1.0,1
+23,6,[Get<NUM>GInfor]NetType value: LTE,boot,1.0,1
+24,6,"[Get<NUM>GInfor]Connect: <NUM>,<NUM>",boot,1.0,1
+25,6,[set role ID]Start...,ble,1.0,1
+18,6,"[Get<NUM>GInfor]IMEI value: <ID>, len: <NUM>",boot,1.0,1
+9,6,Rs<NUM>ST:/dev/ttyMSM<NUM>,boot,1.0,1
+6,6,Console:ON,boot,1.0,1
+8,6,LogTar: <NUM>,boot,1.0,1
+43,6,[read][/config/SerialNumber]: <ID>,config,1.0,1
+42,6,[read][/config/ModelCode]: EHA<NUM>UC,config,1.0,1
+64,6,"[CreateMQTT]SubTopic: MProd/S/<ID>, PubTopic: MProd/ELD/<ID>",mqtt,1.0,1
+65,6,[CreateMQTT]MQTT connection,mqtt,1.0,1
+63,6,[CreateMQTT]MQTT Broker connection info '<url>',mqtt,1.0,1
+41,6,[read][/config/ELDID]: RTHA<NUM>,config,1.0,1
+40,6,[read][/config/groupNo]: <NUM>,config,1.0,1
+37,6,[main] query factory test mode: <NUM>,boot,1.0,1
+36,6,[TestModeGet]TestMode: <NUM>,uart,1.0,1
+35,6,[TestModeGet] Retcode: <NUM>,uart,1.0,1
+34,6,[TestModeGet] get factory test mode start....,uart,1.0,1
+33,6,[set role ID] set role ID done,ble,1.0,1
+32,6,[BLERoleSetting] Retcode: <NUM>,uart,1.0,1
+26,6,[BLERoleSetting] set role ID start....,uart,1.0,1
+120,6,[STWakeupGet] Retcode: <NUM>,uart,1.0,1
+153,6,[main] Log compression ok,housekeeping,1.0,1
+291,6,"[Driving]CANBUS no network signal and GPS vehicle speed below <NUM> km/h, system will enter sleeping mode",state,1.0,1
+139,6,[write][/config/otaReturnMode]:,config,1.0,1
+143,6,[main] clear tarlogs/sys leftover compression temp,housekeeping,1.0,1
+140,6,[main]/data main usage (largest first):,housekeeping,1.0,1
+154,6,[main] log rotation done,housekeeping,1.0,1
+91,6,[time sync] server time: <DT>,boot,1.0,1
+95,6,[GetInfo]Response: <JSON>,boot,1.0,1
+102,6,[init]:<NUM>s,boot,1.0,1
+101,6,[SourceAddressSet] Retcode: <NUM>,uart,1.0,1
+98,6,[init]<NUM>g Pass,boot,1.0,1
+99,6,[SourceAddressSet] set odometer source filter enable=<NUM> SA=<NUM>x<NUM> start....,uart,1.0,1
+97,6,[init]Check <NUM>g,boot,1.0,1
+155,6,[Standby] standby mode flow start...,state,1.0,1
+103,6,[init] end.,boot,1.0,1
+104,6,[Boot]ELD power-on boot flow start...,boot,1.0,1
+49,6,[read][/config/setVin]:,config,1.0,1
+4,6,[main] VERSION: v<NUM>.<NUM>,boot,1.0,1
+7,6,LogSizek: <NUM>,boot,1.0,1
+93,6,[time sync] set RTC:,boot,1.0,1
+137,6,"[rc.sh] console ready; LogConsole released (wait_i=<NUM>, mode=getty, tty=/dev/ttyMSM<NUM>)",boot,1.0,1
+122,6,[main] query wakeup reason: <NUM>,boot,1.0,1
+61,6,[CreateMQTT] handle TLS related settings,mqtt,1.0,1
+60,6,[EnsureMQTT] try local certificate connection first,mqtt,1.0,1
+47,6,[read][/config/GSensorThres]: <NUM>,config,1.0,1
+46,6,[init]ICCID: <ID>,boot,1.0,1
+45,6,[init]IMEI: <ID>,boot,1.0,1
+44,6,[init]SN: <ID>,boot,1.0,1
+51,6,[International API] loaded stored API token,boot,1.0,1
+59,6,[HasUsableMQTTCredentials] local certificate and mqtt.json usable,mqtt,1.0,1
+50,6,[read][/config/terminalTimezone]: America/Los_Angeles,config,1.0,1
+88,6,[GetTime]Response: <JSON>,boot,1.0,1
+90,6,Server time: <NUM>,boot,1.0,1
+89,6,[GetTime]result: <NUM>,boot,1.0,1
+92,6,[time sync]OS: Wed Sep <NUM> <NUM>:<NUM>:<NUM> UTC <NUM>,boot,1.0,1
+197,6,[Standby] timezone: <NUM>:<NUM>,telemetry,1.0,1
+157,6,[Standby] upload status to backend,state,1.0,1
+96,6,"[GetInfo] device info fetched, Device ID: RTHA<NUM> <ID>",boot,1.0,1
+196,6,[Standby]/data free space: <NUM>%,telemetry,1.0,1
+121,6,WakeupReason: <NUM>,uart,1.0,1
+119,6,[STWakeupGet] query wakeup reason start....,uart,1.0,1
+198,6,[Standby] upload to backend,state,1.0,1
+195,6,[Standby][query ELD temperature] ELDTemperature:<NUM>,telemetry,1.0,1
+293,5,"[STGPSDataGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+296,5,"[STGPSValidGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+245,5,"[STBatteryDataGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+286,4,"[Standby] before first upload GPS/ECM retry <NUM> attempts still not obtained, continue sending",state,1.0,1
+152,4,[CompressLog] deleted compressed source files: /data/APP/logs/<NUM><NUM><NUM>.log,housekeeping,1.0,1
+147,4,[CompressLog] compression ratio about <NUM>% (archive bytes / plaintext bytes),housekeeping,1.0,1
+148,4,[CompressLog] compressed files: /data/APP/logs/<NUM><NUM><NUM>.log,housekeeping,1.0,1
+149,4,[CleanOldDateFiles] /data/APP/tarlogs/sys file count: <NUM>,housekeeping,1.0,1
+165,4,"[Standby][query ECM data] ECM data contains N/A or VIN not ready, retry (<NUM>/<NUM>)",telemetry,1.0,1
+150,4,[CompressLog] files not exceeding <NUM>M no deletion needed,housekeeping,1.0,1
+151,4,[CompressLog] cleared leftover temp: <NUM><NUM><NUM>.tar.gz.merge.tmp,housekeeping,1.0,1
+315,4,"[Sleeping]GPS vehicle speed reached <NUM> km/h or more, system will enter driving mode",state,1.0,1
+294,4,"[SourceMileageListGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+146,4,[CompressLog] merged existing archive with <NUM><NUM><NUM>.log (plaintext <NUM> bytes),housekeeping,1.0,1
+276,4,[restore.sh] <*>,boot,1.0,1
+258,4,"[STFWVersionGet] ret/cmd=<NUM>/FF want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+256,4,[Driving] self-test failed,error,1.0,1
+246,4,[NotifyECMNoDetected] ECM No Detected start....,error,1.0,1
+240,4,"[Sleeping]RPM greater than <NUM>, system will enter driving mode",state,1.0,1
+308,3,"[SendDMS] backend no response, written to re-upload folder",upload,1.0,1
+307,3,/work/iot/src/main/Controller/controller_mqtt.go:<NUM>: [WaitForAck]Time out,error,1.0,1
+252,3,[read][/config/otaReturnMode]:,config,1.0,1
+306,3,"[MQTT reconnectHandler]<ID>--- auto reconnect after disconnect, consecutive disconnects:<NUM>",mqtt,1.0,1
+305,3,/work/iot/src/main/MQTT/mqtt.go:<NUM>: [MQTT lostHandler]blocker connection closed:read tcp <ip>-><ip>: read: connection reset by peer,error,1.0,1
+257,3,"[STBattery<NUM>VCheck] <*> want cmd <NUM>, retry <NUM>/<NUM>",error,1.0,1
+310,3,"[Reupload] re-upload batch <NUM>, total <NUM> records",upload,1.0,1
+311,3,[Reupload] re-upload /data/APP/upload/<NUM>_part<NUM> done,upload,1.0,1
+309,3,[Reupload] check re-upload file: /data/APP/upload/<NUM>_part<NUM>,upload,1.0,1
+251,3,"[main]: boot, always standby (regardless of otaReturnMode)",state,1.0,1
+138,2,"[main] no notification received, no update needed",boot,1.0,1
+123,2,"[main]: shipping or reset restart, query whether needed OTA",boot,1.0,1
+136,2,[main][query <NUM>V battery present] <NUM>V battery status:<NUM>,telemetry,1.0,1
+125,2,[main][AskUpgrade] mqtt connected (attempt <NUM>/<NUM> times),boot,1.0,1
+128,2,[main] timezone: <NUM>:<NUM>,telemetry,1.0,1
+271,2,[Upgrade] <*> <*> upload to backend,state,1.0,1
+167,2,[Standby][query ECM data] ECM CAN ID:<NUM>,telemetry,1.0,1
+273,1,run: /data/APP/upgrade/bin/upgrade,ota,1.0,1
+270,1,[Upgrade] timezone: <NUM>:<NUM>,telemetry,1.0,1
+272,1,[Upgrade] start upgrade,ota,1.0,1
+267,1,[Upgrade] update flow start...,state,1.0,1
+268,1,"[Upgrade]MQTT issued Update command, performing system update",ota,1.0,1
+266,1,"[Sleeping] remote OTA marked to enter mode <NUM>, leaving sleep loop",state,1.0,1
+269,1,[Upgrade] timestamp: <DT>,ota,1.0,1
+280,1,[Login]result: <NUM>,boot,1.0,1
+279,1,[Login]key: <redacted>,boot,1.0,1
+297,1,/work/iot/src/main/BLE/BLESendAndWait.go:<NUM>: [BLEAdvertisOnOff] recv timeout (no retry),error,1.0,1
+277,1,"[International API] time response error, again login",boot,1.0,1
+278,1,[Login] within one hour login count: <NUM>/<NUM> (started at <DT>),boot,1.0,1
+282,1,"[main]: ST update wakeup, always standby (regardless of otaReturnMode)",state,1.0,1
+283,1,[read][/config/otaReturnMode]: <NUM>,config,1.0,1
+281,1,[Login] saved API token,boot,1.0,1
+274,1,[Upgrade][Remove]: /data/APP/upgrade/output.txt,ota,1.0,1
+275,1,[Upgrade]UPS Output:Success,ota,1.0,1
+284,1,"[OTA] ignore otaReturnMode=<NUM>, boot always standby(<NUM>)",state,1.0,1
+299,1,[Driving][UD] entering unidentified driving,ud,1.0,1
+300,1,[Driving][UD] upload event event:unidentified_driving,ud,1.0,1
+263,1,"[main-ota] get version differs from stored value, rewriting,Before: Prod_v<NUM>.<NUM> After: v<NUM>_v<NUM>.<NUM>",ota,1.0,1
+262,1,"[main-ota] OTA apply command but no valid staging, entering mode <NUM> full online update",ota,1.0,1
+261,1,[main-ota] no valid staging,ota,1.0,1
+260,1,[main-ota] received mqtt(OTA): <JSON>,ota,1.0,1
+259,1,[MQTT messageHandler] forward topic=MProd/S/<ID>/ota -> MQTTOtaChannel (OTA apply),mqtt,1.0,1
+298,1,/work/iot/src/main/BLE/BLEAdvertisOnOff.go:<NUM>: [BLEAdvertisOnOff]recv timeout or retry exhausted,error,1.0,1
+265,1,"[main-ota] marked to enter OTA (GroupNo=<NUM>), main state machine will enter Upgrade",state,1.0,1
+264,1,[write][/config/otaReturnMode]: <NUM>,config,1.0,1
+301,1,[read][/config/ELDSeqID]: <NUM>,config,1.0,1
+302,1,[write][/config/ELDSeqID]: <NUM>,config,1.0,1
+316,1,"[Sleeping]ECM vehicle speed greater than <NUM>, system will enter driving mode",state,1.0,1

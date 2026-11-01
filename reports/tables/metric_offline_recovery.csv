@@ -1,0 +1,4 @@
+device_key,payload_timestamp,original_publish_ts,original_acked,resend_ts,resend_acked,resend_ack_ts,delivery_delay_s
+DEV-40f3ef472c,20260924010549,2026-09-24 01:06:32,False,2026-09-24 01:06:45,True,2026-09-24 01:06:45,13.0
+DEV-ada95db42a,20260915151121,2026-09-15 15:11:46,False,2026-09-15 15:11:54,True,2026-09-15 15:11:56,10.0
+DEV-ada95db42a,20260915151156,2026-09-15 15:12:21,False,2026-09-15 15:12:53,True,2026-09-15 15:12:53,32.0

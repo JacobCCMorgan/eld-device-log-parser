@@ -1,0 +1,3 @@
+device_key,err_attempts,suppressed_by_cooldown,events_published,codes,min_gps_speed_at_attempt,cooldown_max_s
+DEV-40f3ef472c,0,0,3,"ERR006,U001,U006",,
+DEV-ada95db42a,22,21,1,ERR005,8.0,3526.499306903

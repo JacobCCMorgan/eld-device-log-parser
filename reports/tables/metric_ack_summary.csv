@@ -1,0 +1,3 @@
+device_key,publishes,acked,ack_within_1s,ack_p50_s,ack_max_s,stored_resends,ack_rate,ack_within_1s_rate
+DEV-40f3ef472c,246,244,244,1.0,1.0,1,0.991869918699187,1.0
+DEV-ada95db42a,58,56,55,0.0,2.0,2,0.9655172413793104,0.9821428571428571
