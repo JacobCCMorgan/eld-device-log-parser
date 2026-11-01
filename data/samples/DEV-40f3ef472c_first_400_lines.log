@@ -1,0 +1,400 @@
+ELD   :2026/09/23 21:41:06 [restore.sh] /data/APP/upgrade/ md5 is same, skip.
+ELD   :2026/09/23 21:41:06 [restore.sh] /data/APP/shell/ md5 is same, skip.
+ELD   :2026/09/23 21:41:08 [change_user.sh] passwd md5 ok exit.
+ELD   :2026/09/23 21:41:08 [change_user.sh] shadow md5 ok exit
+ELD   :2026/09/23 21:41:08 [change_user.sh] profile md5 ok exit.
+ELD   :2026/09/23 21:41:08 [change_user.sh] group md5 ok exit
+Info   :2026/09/23 21:41:09
+Info   :2026/09/23 21:41:09
+Consol :2026/09/23 21:41:09 [main] VERSION: v1.5.0
+Info   :2026/09/23 21:41:09 *******************config.json*******************
+Info   :2026/09/23 21:41:09 Console:ON
+Info   :2026/09/23 21:41:09 LogSizek: 10000
+Info   :2026/09/23 21:41:09 LogTar: 20
+Info   :2026/09/23 21:41:09 Rs232ST:/dev/ttyMSM3
+Info   :2026/09/23 21:41:09 Rs232BLE:/dev/ttyHS2
+Info   :2026/09/23 21:41:09 *******************config.json*******************
+Info   :2026/09/23 21:41:09 [main] System start...
+Info   :2026/09/23 21:41:09 ***************************************************
+Info   :2026/09/23 21:41:09 [init] Initial start
+Info   :2026/09/23 21:41:09 ***************************************************
+Info   :2026/09/23 21:41:09 [NewRS232]Create rs232 succeed
+Info   :2026/09/23 21:41:09 [init]InitST succeed
+Info   :2026/09/23 21:41:09 [NewRS232]Create rs232 succeed
+Info   :2026/09/23 21:41:09 [init]InitBLE succeed
+Info   :2026/09/23 21:41:09 [init]Start 4g
+Info   :2026/09/23 21:41:10 [Get4GInfor]IMEI value: IMEI-988266a3ea, len: 15
+Info   :2026/09/23 21:41:11 [Get4GInfor]ICCID value: ICCID-15a4cd9dd2, len: 20
+Info   :2026/09/23 21:41:12 [Get4GInfor]RSRP value: -74dBm, len: 6
+Info   :2026/09/23 21:41:12 [Get4GInfor]RSRQ value: -9dBm, len: 5
+Info   :2026/09/23 21:41:12 [Get4GInfor]SNR value: 20dBm, len: 5
+Info   :2026/09/23 21:41:12 [Get4GInfor]NetType value: LTE
+Info   :2026/09/23 21:41:13 [Get4GInfor]Connect: 0,5
+Info   :2026/09/23 21:41:13 [set role ID]Start...
+Info   :2026/09/23 21:41:13 [BLERoleSetting] set role ID start....
+Info   :2026/09/23 21:41:13 Send_data[6 byte]: 60 01 80 21 89 49
+Info   :2026/09/23 21:41:13 [init start][RuntimeLED] start...
+Info   :2026/09/23 21:41:13 [init start][RuntimeBLE] start...
+Info   :2026/09/23 21:41:13 [init start][RuntimeTrailerGpsSync] start...
+Info   :2026/09/23 21:41:13 [init start][RuntimeST] start...
+Info   :2026/09/23 21:41:14 Read_data[8 byte]: 06 03 80 21 89 00 01 2C
+Info   :2026/09/23 21:41:14 [BLEMessageGet]cmd: 21
+Info   :2026/09/23 21:41:14 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:14 [BLERoleSetting] Retcode: 0001
+Info   :2026/09/23 21:41:14 [set role ID] set role ID done
+Info   :2026/09/23 21:41:15 [TestModeGet] get factory test mode start....
+Info   :2026/09/23 21:41:15 Send_data[6 byte]: 60 01 80 61 89 09
+Info   :2026/09/23 21:41:15 Read_data[9 byte]: 06 04 80 61 89 00 01 00 6B
+Info   :2026/09/23 21:41:15 [BLEMessageGet]cmd: 61
+Info   :2026/09/23 21:41:15 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:15 [TestModeGet] Retcode: 0001
+Info   :2026/09/23 21:41:15 [TestModeGet]TestMode: 00
+Info   :2026/09/23 21:41:15 [main] query factory test mode: 00
+Info   :2026/09/23 21:41:15 [enable BLE advertising]Start...
+Info   :2026/09/23 21:41:15 [BLEAdvertisOnOff] enable / disable BLE advertising start....
+Info   :2026/09/23 21:41:15 [read][/config/groupNo]: 4
+Info   :2026/09/23 21:41:15 [read][/config/ELDID]: RTHA55
+Info   :2026/09/23 21:41:15 [read][/config/ModelCode]: EHA554UC
+Info   :2026/09/23 21:41:15 [read][/config/SerialNumber]: DEV-40f3ef472c
+Consol :2026/09/23 21:41:15 [init]SN: DEV-40f3ef472c
+Consol :2026/09/23 21:41:15 [init]IMEI: IMEI-988266a3ea
+Consol :2026/09/23 21:41:15 [init]ICCID: ICCID-15a4cd9dd2
+Info   :2026/09/23 21:41:15 [read][/config/GSensorThres]: 100
+Info   :2026/09/23 21:41:15 [read][/config/sourceAddr]: 00
+Info   :2026/09/23 21:41:15 [read][/config/setVin]:
+Info   :2026/09/23 21:41:15 [read][/config/terminalTimezone]: America/Los_Angeles
+Info   :2026/09/23 21:41:15 [International API] loaded stored API token
+Info   :2026/09/23 21:41:15 [GetMQTTConfigJson] read MQTT config file and compare URL
+Info   :2026/09/23 21:41:16 *******************MQTT.json*******************
+Info   :2026/09/23 21:41:16 Url: <url>
+Info   :2026/09/23 21:41:16 KeepAliveTime: 3590
+Info   :2026/09/23 21:41:16 PingTimeoutTime: 20
+Info   :2026/09/23 21:41:16 Sub: MProd/S/IMEI-988266a3ea
+Info   :2026/09/23 21:41:16 Pub: MProd/ELD/IMEI-988266a3ea
+Info   :2026/09/23 21:41:16 *******************MQTT.json*******************
+Info   :2026/09/23 21:41:16 Send_data[7 byte]: 60 02 80 32 89 00 59
+Info   :2026/09/23 21:41:16 [HasUsableMQTTCredentials] local certificate and mqtt.json usable
+Info   :2026/09/23 21:41:16 [EnsureMQTT] try local certificate connection first
+Info   :2026/09/23 21:41:16 [CreateMQTT] handle TLS related settings
+Info   :2026/09/23 21:41:16 [CreateMQTT] handle MQTT Client ID: DEV-40f3ef472c
+Info   :2026/09/23 21:41:16 [CreateMQTT] handle MQTT Client related settings
+Info   :2026/09/23 21:41:16 [CreateMQTT]MQTT Broker connection info '<url>'
+Info   :2026/09/23 21:41:16 [CreateMQTT]SubTopic: MProd/S/IMEI-988266a3ea, PubTopic: MProd/ELD/IMEI-988266a3ea
+Info   :2026/09/23 21:41:16 [CreateMQTT]MQTT connection
+Info   :2026/09/23 21:41:16 Read_data[8 byte]: 06 03 80 32 89 00 01 3F
+Info   :2026/09/23 21:41:16 [BLEMessageGet]cmd: 32
+Info   :2026/09/23 21:41:16 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEAdvertisOnOff] Retcode: 0001
+Info   :2026/09/23 21:41:16 [BleBroadcast] BLE advertising disabled
+Info   :2026/09/23 21:41:16 [BLEDeviceNameSet] set BLE device name start....
+Info   :2026/09/23 21:41:16 [BLEDeviceNameSet]deviceName: RTHA55 DEV-40f3ef472c
+Info   :2026/09/23 21:41:16 Send_data[27 byte]: 60 12 80 30 89 52 54 48 41 35 35 20 44 45 56 2D 34 30 66 33 65 66 34 37 32 63 6E
+Info   :2026/09/23 21:41:16 Read_data[8 byte]: 06 03 80 30 89 00 01 3D
+Info   :2026/09/23 21:41:16 [BLEMessageGet]cmd: 30
+Info   :2026/09/23 21:41:16 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEDeviceNameSet] Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEDeviceNameGet] get BLE device name start....
+Info   :2026/09/23 21:41:16 Send_data[6 byte]: 60 01 80 37 89 5F
+Info   :2026/09/23 21:41:16 Read_data[29 byte]: 06 14 80 37 89 00 01 52 54 48 41 35 35 20 44 45 56 2D 34 30 66 33 65 66 34 37 32 63 08
+Info   :2026/09/23 21:41:16 [BLEMessageGet]cmd: 37
+Info   :2026/09/23 21:41:16 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEDeviceNameGet] Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEDeviceNameGet]bleDeviceName: RTHA55 DEV-40f3ef472c
+Info   :2026/09/23 21:41:16 [BleBroadcast] set device name done
+Info   :2026/09/23 21:41:16 [BLEStatusUpdateSet] set module status notification start....
+Info   :2026/09/23 21:41:16 Send_data[7 byte]: 60 02 80 22 89 01 48
+Info   :2026/09/23 21:41:16 Read_data[8 byte]: 06 03 80 22 89 00 01 2F
+Info   :2026/09/23 21:41:16 [BLEMessageGet]cmd: 22
+Info   :2026/09/23 21:41:16 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEStatusUpdateSet] Retcode: 0001
+Info   :2026/09/23 21:41:16 [BleBroadcast] module status notification set done
+Info   :2026/09/23 21:41:16 [BLEAdvertisSetting] set BLE advertising parameters start....
+Info   :2026/09/23 21:41:16 Send_data[18 byte]: 60 0D 80 31 89 FF FF FF FF FF FF FF FF FF FF FF FF 55
+Info   :2026/09/23 21:41:16 Read_data[8 byte]: 06 03 80 31 89 00 01 3C
+Info   :2026/09/23 21:41:16 [BLEMessageGet]cmd: 31
+Info   :2026/09/23 21:41:16 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEAdvertisSetting] Retcode: 0001
+Info   :2026/09/23 21:41:16 [BleBroadcast] advertising parameters set done
+Info   :2026/09/23 21:41:16 [BLEAdvertisOnOff] enable / disable BLE advertising start....
+Info   :2026/09/23 21:41:16 Send_data[7 byte]: 60 02 80 32 89 01 58
+Info   :2026/09/23 21:41:16 Read_data[8 byte]: 06 03 80 32 89 00 01 3F
+Info   :2026/09/23 21:41:16 [BLEMessageGet]cmd: 32
+Info   :2026/09/23 21:41:16 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:16 [BLEAdvertisOnOff] Retcode: 0001
+Info   :2026/09/23 21:41:16 [BleBroadcast] BLE advertising enable done
+Info   :2026/09/23 21:41:17 Read_data[10 byte]: 06 05 80 23 89 00 01 01 00 29
+Info   :2026/09/23 21:41:17 [BLEMessageGet]cmd: 23
+Info   :2026/09/23 21:41:17 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:17 [BLEStatusUpdate] module status notification start....
+Info   :2026/09/23 21:41:17 [BLEStatusUpdate]APP advertising enabled
+Info   :2026/09/23 21:41:17 [BLEStatusUpdate]BLE not connected Trailer GPS
+Info   :2026/09/23 21:41:17 [BLEStatusUpdate] received module status notification, responding
+Info   :2026/09/23 21:41:17 Send_data[8 byte]: 60 03 80 23 89 00 01 48
+Info   :2026/09/23 21:41:22 [MQTT connectHandler]Connected
+Info   :2026/09/23 21:41:22 [MQTT connectHandler]--- subscribe topics after connect:
+Info   :2026/09/23 21:41:22 [MQTT connectHandler] subscribe topic: MProd/S/IMEI-988266a3ea/#
+Info   :2026/09/23 21:41:23 [International API Send] response time: 872.411458ms
+Info   :2026/09/23 21:41:23 [International API Send] Response Body: {"timestamp":"1790199683.4078"}
+Info   :2026/09/23 21:41:23 [GetTime]Response: {"timestamp":"1790199683.4078"}
+Info   :2026/09/23 21:41:23 [GetTime]result: 1790199683.4078
+Info   :2026/09/23 21:41:23 Server time: 1790199683
+Info   :2026/09/23 21:41:23 [time sync] server time: 2026-09-23 21:41:23
+Info   :2026/09/23 21:41:23 [time sync]OS: Wed Sep 23 21:41:23 UTC 2026
+Info   :2026/09/23 21:41:23 [time sync] set RTC:
+Info   :2026/09/23 21:41:23 -----------------------------------------
+Info   :2026/09/23 21:41:23 [International API Send] response time: 902.171458ms
+Info   :2026/09/23 21:41:23 [International API Send] Response Body: {"eld_id":"RTHA55","sn":"DEV-40f3ef472c","device_id":"RTHA55 DEV-40f3ef472c","trailer_gps":null,"g_sensor":"100","source_addr":null,"set_vin":null,"terminal_timezone":"America\/Los_Angeles"}
+Info   :2026/09/23 21:41:23 [GetInfo]Response: {"eld_id":"RTHA55","sn":"DEV-40f3ef472c","device_id":"RTHA55 DEV-40f3ef472c","trailer_gps":null,"g_sensor":"100","source_addr":null,"set_vin":null,"terminal_timezone":"America\/Los_Angeles"}
+Info   :2026/09/23 21:41:23 [GetInfo] device info fetched, Device ID: RTHA55 DEV-40f3ef472c
+Info   :2026/09/23 21:41:23 [init]Check 4g
+Consol :2026/09/23 21:41:23 [init]4g Pass
+Info   :2026/09/23 21:41:23 [SourceAddressSet] set odometer source filter enable=1 SA=0x00 start....
+Info   :2026/09/23 21:41:23 Send_data[7 byte]: 80 00 04 34 01 00 B1
+Info   :2026/09/23 21:41:23 Read_data[7 byte]: 08 00 04 34 00 01 39
+Info   :2026/09/23 21:41:23 [STMessageGet] cmd: 34
+Info   :2026/09/23 21:41:23 [SourceAddressSet] Retcode: 0001
+Info   :2026/09/23 21:41:23 [init]:14.547247859s
+Info   :2026/09/23 21:41:23 [init] end.
+Info   :2026/09/23 21:41:23
+Info   :2026/09/23 21:41:23 ***************************************************
+Info   :2026/09/23 21:41:23 [Boot]ELD power-on boot flow start...
+Info   :2026/09/23 21:41:23 ***************************************************
+Info   :2026/09/23 21:41:24 [FreeMem] sync
+Info   :2026/09/23 21:41:24
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [SelfTest] device self-test start...
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [BLEFWVersionGet] get firmware version start....
+Info   :2026/09/23 21:41:24 Send_data[6 byte]: 60 01 80 20 89 48
+Info   :2026/09/23 21:41:24 Read_data[26 byte]: 06 15 80 20 89 00 01 4D 53 32 35 30 32 5F 42 4C 45 5F 76 32 5F 30 5F 72 35 58
+Info   :2026/09/23 21:41:24 [BLEMessageGet]cmd: 20
+Info   :2026/09/23 21:41:24 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:24 [BLEFWVersionGet] Retcode: 0001
+Info   :2026/09/23 21:41:24 [BLEFWVersionGet]fwVersion: MS2502_BLE_v2_0_r5
+Consol :2026/09/23 21:41:24 [SelfTest][device self-test] BLE version: MS2502_BLE_v2_0_r5
+Info   :2026/09/23 21:41:24 -----------------------------------------
+Info   :2026/09/23 21:41:24 [STFWVersionGet] get firmware version start....
+Info   :2026/09/23 21:41:24 Send_data[5 byte]: 80 00 02 11 93
+Info   :2026/09/23 21:41:24 Read_data[24 byte]: 08 00 15 11 4D 53 32 35 30 32 45 4C 44 5F 76 32 5F 30 5F 62 36 00 01 24
+Info   :2026/09/23 21:41:24 [STMessageGet] cmd: 11
+Info   :2026/09/23 21:41:24 [STFWVersionGet] Retcode: 0001
+Info   :2026/09/23 21:41:24 fwVersion: 4D 53 32 35 30 32 45 4C 44 5F 76 32 5F 30 5F 62 36
+Info   :2026/09/23 21:41:24 fwVersion: MS2502ELD_v2_0_b6
+Consol :2026/09/23 21:41:24 [SelfTest][device self-test] ST version: MS2502ELD_v2_0_b6
+Info   :2026/09/23 21:41:24 -----------------------------------------
+Info   :2026/09/23 21:41:24 [SelfTest][device self-test]Check 4g
+Info   :2026/09/23 21:41:24 [network check]:
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [SelfTest][device self-test]state: 1
+Info   :2026/09/23 21:41:24 [SelfTest]:219.5575ms
+Info   :2026/09/23 21:41:24 [SelfTest] device self-test end
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [control LED][controlLED] start...
+Info   :2026/09/23 21:41:24 -----------------------------------------
+Info   :2026/09/23 21:41:24 [STWakeupGet] query wakeup reason start....
+Info   :2026/09/23 21:41:24 Send_data[5 byte]: 80 00 02 22 A0
+Info   :2026/09/23 21:41:24 Read_data[8 byte]: 08 00 05 22 10 00 01 3E
+Info   :2026/09/23 21:41:24 [STMessageGet] cmd: 22
+Info   :2026/09/23 21:41:24 [STWakeupGet] Retcode: 0001
+Info   :2026/09/23 21:41:24 WakeupReason: 10
+Info   :2026/09/23 21:41:24 [main] query wakeup reason: 10
+Info   :2026/09/23 21:41:24 [main]: shipping or reset restart, query whether needed OTA
+Info   :2026/09/23 21:41:24
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [SelfTest] device self-test start...
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [SelfTest][device self-test]Check 4g
+Info   :2026/09/23 21:41:24 [RuntimeLED][channel] command: 3__LedN0__LedN0__65535__65535__0
+Info   :2026/09/23 21:41:24 [network check]:
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [SelfTest][device self-test]state: 1
+Info   :2026/09/23 21:41:24 [SelfTest]:128.976146ms
+Info   :2026/09/23 21:41:24 [SelfTest] device self-test end
+Info   :2026/09/23 21:41:24 ***************************************************
+Info   :2026/09/23 21:41:24 [main][AskUpgrade] mqtt connected (attempt 1/6 times)
+Info   :2026/09/23 21:41:24 [BLELedSet] set LED color start....
+Info   :2026/09/23 21:41:24 Send_data[14 byte]: 60 09 80 50 89 03 00 00 FF FF FF FF FF CC
+Info   :2026/09/23 21:41:24 Read_data[8 byte]: 06 03 80 50 89 00 01 5D
+Info   :2026/09/23 21:41:24 [BLEMessageGet]cmd: 50
+Info   :2026/09/23 21:41:24 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:24 [BLELedSet] Retcode: 0001
+Info   :2026/09/23 21:41:25 [main] timezone: -04:00
+Info   :2026/09/23 21:41:25 [FreeMem] sync
+Info   :2026/09/23 21:41:25 [control LED][controlLED] start...
+Consol :2026/09/23 21:41:25 [MQTT Publish]--- publish message >>:Topic:MProd/ELD/IMEI-988266a3ea
+Consol :2026/09/23 21:41:25 [MQTT Publish]Payload:{"e_fw_v":"v1.5.0","is_stored":"0","mode":"10","sn":"DEV-40f3ef472c","timestamp":"20260923214124","timezone":"-04:00"}
+Info   :2026/09/23 21:41:25 [RuntimeLED][channel] command: 3__LedB3__LedN0__00300__00300__2
+Info   :2026/09/23 21:41:25 [BLELedSet] set LED color start....
+Info   :2026/09/23 21:41:25 Send_data[14 byte]: 60 09 80 50 89 03 03 00 01 2C 01 2C 02 32
+Info   :2026/09/23 21:41:25 Read_data[8 byte]: 06 03 80 50 89 00 01 5D
+Info   :2026/09/23 21:41:25 [BLEMessageGet]cmd: 50
+Info   :2026/09/23 21:41:25 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:25 [BLELedSet] Retcode: 0001
+Info   :2026/09/23 21:41:26 =============================================================
+Info   :2026/09/23 21:41:26 [MQTT messageHandler]--- received message <<:Topic:MProd/S/IMEI-988266a3ea/ack
+Info   :2026/09/23 21:41:26 [MQTT messageHandler]Payload(MSG):{"timestamp": "20260923214124", "timezone": "-04:00", "mode": "10", "is_stored": "0"}
+Info   :2026/09/23 21:41:26 =============================================================
+Info   :2026/09/23 21:41:26 [MQTT messageHandler] forward topic=MProd/S/IMEI-988266a3ea/ack -> MQTTChannel (WaitForAck; expected topic=MProd/S/IMEI-988266a3ea/ack)
+Info   :2026/09/23 21:41:26 [CarInfoGet]Start...
+Info   :2026/09/23 21:41:26 [STBattery12VCheck] query 12V battery present start....
+Info   :2026/09/23 21:41:26 Send_data[5 byte]: 80 00 02 54 D6
+Info   :2026/09/23 21:41:26 Read_data[8 byte]: 08 00 05 54 01 00 01 59
+Info   :2026/09/23 21:41:26 [STMessageGet] cmd: 54
+Info   :2026/09/23 21:41:26 [STBattery12VCheck] Retcode: 0001
+Info   :2026/09/23 21:41:26 [STBattery12VCheck]BatteryCheck: 01
+Info   :2026/09/23 21:41:26 [main][query 12V battery present] 12V battery status:01
+ELD   :2026/09/23 21:41:28 [rc.sh] console ready; LogConsole released (wait_i=11, mode=getty, tty=/dev/ttyMSM0)
+Info   :2026/09/23 21:41:31 [BLEFWVersionGet] get firmware version start....
+Info   :2026/09/23 21:41:31 Send_data[6 byte]: 60 01 80 20 89 48
+Info   :2026/09/23 21:41:31 Read_data[26 byte]: 06 15 80 20 89 00 01 4D 53 32 35 30 32 5F 42 4C 45 5F 76 32 5F 30 5F 72 35 58
+Info   :2026/09/23 21:41:31 [BLEMessageGet]cmd: 20
+Info   :2026/09/23 21:41:31 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:31 [BLEFWVersionGet] Retcode: 0001
+Info   :2026/09/23 21:41:31 [BLEFWVersionGet]fwVersion: MS2502_BLE_v2_0_r5
+Info   :2026/09/23 21:41:31 [STFWVersionGet] get firmware version start....
+Info   :2026/09/23 21:41:31 Send_data[5 byte]: 80 00 02 11 93
+Info   :2026/09/23 21:41:31 Read_data[24 byte]: 08 00 15 11 4D 53 32 35 30 32 45 4C 44 5F 76 32 5F 30 5F 62 36 00 01 24
+Info   :2026/09/23 21:41:31 [STMessageGet] cmd: 11
+Info   :2026/09/23 21:41:31 [STFWVersionGet] Retcode: 0001
+Info   :2026/09/23 21:41:31 fwVersion: 4D 53 32 35 30 32 45 4C 44 5F 76 32 5F 30 5F 62 36
+Info   :2026/09/23 21:41:31 fwVersion: MS2502ELD_v2_0_b6
+Info   :2026/09/23 21:41:31 [main] no notification received, no update needed
+Info   :2026/09/23 21:41:31 [write][/config/otaReturnMode]:
+Info   :2026/09/23 21:41:31 [main]/data main usage (largest first):
+Info   :2026/09/23 21:41:31 [main] 43 MiB /data/APP
+Info   :2026/09/23 21:41:31 [main] 24 MiB /data/APP/logs
+Info   :2026/09/23 21:41:31 [main] 11 MiB /data/APP/tarlogs
+Info   :2026/09/23 21:41:31 [main] 9 MiB /data/restore
+Info   :2026/09/23 21:41:31 [main] 5 MiB /data/APP/bin
+Info   :2026/09/23 21:41:31 [main] 4 MiB /data/APP/upgrade
+Info   :2026/09/23 21:41:31 [main] 209 KiB /data/misc
+Info   :2026/09/23 21:41:31 [main] 39 KiB /data/APP/shell
+Info   :2026/09/23 21:41:31 [main] 16 KiB /data/www
+Info   :2026/09/23 21:41:31 [main] 14 KiB /data/lighttpd.conf
+Info   :2026/09/23 21:41:31 [main] 12 KiB /data/dnsmasq.conf
+Info   :2026/09/23 21:41:31 [main] 10 KiB /data/tinyproxy.conf
+Info   :2026/09/23 21:41:31 [main] /data/APP/logs contents (largest first, max 8 records):
+Info   :2026/09/23 21:41:31 [main] 23 MiB /data/APP/logs/sys.log
+Info   :2026/09/23 21:41:31 [main] 173 KiB /data/APP/logs/ups.log
+Info   :2026/09/23 21:41:31 [main] 6 KiB /data/APP/logs/storage_check.log
+Info   :2026/09/23 21:41:31 [main] /data/APP/tarlogs contents (largest first, max 8 records):
+Info   :2026/09/23 21:41:31 [main] 11 MiB /data/APP/tarlogs/sys
+Info   :2026/09/23 21:41:31 [main] /data/APP/tarlogs/sys contents (largest first, max 8 records):
+Info   :2026/09/23 21:41:31 [main] 2 MiB /data/APP/tarlogs/sys/2026-09-21.tar.gz
+Info   :2026/09/23 21:41:31 [main] 2 MiB /data/APP/tarlogs/sys/2026-09-19.tar.gz
+Info   :2026/09/23 21:41:31 [main] 2 MiB /data/APP/tarlogs/sys/2026-09-18.tar.gz
+Info   :2026/09/23 21:41:31 [main] 2 MiB /data/APP/tarlogs/sys/2026-09-22.tar.gz
+Info   :2026/09/23 21:41:31 [main] 2 MiB /data/APP/tarlogs/sys/2026-09-20.tar.gz
+Info   :2026/09/23 21:41:31 [main] 2 MiB /data/APP/tarlogs/sys/2026-09-17.tar.gz
+Info   :2026/09/23 21:41:31 [main] 310 KiB /data/APP/tarlogs/sys/2026-09-14.tar.gz
+Info   :2026/09/23 21:41:31 [main] 248 KiB /data/APP/tarlogs/sys/2026-09-15.tar.gz
+Info   :2026/09/23 21:41:31 [main] clear tarlogs/sys leftover compression temp
+Info   :2026/09/23 21:41:33 [CompressLog] Log date filter done
+Info   :2026/09/23 21:41:33 [CompressLog] before compression sys.log size: 24078510 bytes (~23515 KiB), merged this time 2026-09-22.log: 227 bytes (~1 KiB)
+Info   :2026/09/23 21:41:35 [CompressLog] merged existing archive with 2026-09-22.log (plaintext 27888177 bytes)
+Info   :2026/09/23 21:41:41 [CompressLog] after compression 2026-09-22.tar.gz size: 1784453 bytes (~1743 KiB), merged tar plaintext size: 27888177 bytes (~27235 KiB)
+Info   :2026/09/23 21:41:41 [CompressLog] compression ratio about 6.4% (archive bytes / plaintext bytes)
+Info   :2026/09/23 21:41:41 [CompressLog] compressed files: /data/APP/logs/2026-09-22.log
+Info   :2026/09/23 21:41:41 [CleanOldDateFiles] /data/APP/tarlogs/sys file count: 10
+Info   :2026/09/23 21:41:41 [CompressLog] files not exceeding 50M no deletion needed
+Info   :2026/09/23 21:41:42 [CompressLog] cleared leftover temp: 2026-09-22.tar.gz.merge.tmp
+Info   :2026/09/23 21:41:42 [CompressLog] deleted compressed source files: /data/APP/logs/2026-09-22.log
+Info   :2026/09/23 21:41:42 [main] Log compression ok
+Info   :2026/09/23 21:41:45 [main] log rotation done
+Info   :2026/09/23 21:41:45
+Info   :2026/09/23 21:41:45 ***************************************************
+Info   :2026/09/23 21:41:45 [Standby] standby mode flow start...
+Info   :2026/09/23 21:41:45 ***************************************************
+Info   :2026/09/23 21:41:45 [write][/config/groupNo]: 1
+Info   :2026/09/23 21:41:45 [Standby] upload status to backend
+Info   :2026/09/23 21:41:45
+Info   :2026/09/23 21:41:45 ***************************************************
+Info   :2026/09/23 21:41:45 [SelfTest] device self-test start...
+Info   :2026/09/23 21:41:45 ***************************************************
+Info   :2026/09/23 21:41:45 [SelfTest][device self-test]Check 4g
+Info   :2026/09/23 21:41:46 [network check]:
+Info   :2026/09/23 21:41:46 ***************************************************
+Info   :2026/09/23 21:41:46 [SelfTest][device self-test]state: 1
+Info   :2026/09/23 21:41:46 [SelfTest]:160.196198ms
+Info   :2026/09/23 21:41:46 [SelfTest] device self-test end
+Info   :2026/09/23 21:41:46 ***************************************************
+Info   :2026/09/23 21:41:46 [CarInfoGet]Start...
+Info   :2026/09/23 21:41:46 [STECMProtocolGet] query ECM protocol start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 31 B3
+Info   :2026/09/23 21:41:46 Read_data[8 byte]: 08 00 05 31 01 00 01 3C
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 31
+Info   :2026/09/23 21:41:46 [STECMProtocolGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 ECMProtocol: 01
+Info   :2026/09/23 21:41:46 [Standby][query ECM protocol] ECM protocol:01
+Info   :2026/09/23 21:41:46 [STECMDataGet] query ECM data start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 32 B0
+Info   :2026/09/23 21:41:46 Read_data[42 byte]: 08 00 27 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 68 BD 4B FF FF FF FF 00 00 18 FE E0 00 00 01 8B
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 32
+Info   :2026/09/23 21:41:46 [STECMDataGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 ECMData: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 68 BD 4B FF FF FF FF 00 00 18 FE E0 00
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] ECM data contains N/A or VIN not ready, retry (1/3)
+Info   :2026/09/23 21:41:46 [STECMDataGet] query ECM data start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 32 B0
+Info   :2026/09/23 21:41:46 Read_data[42 byte]: 08 00 27 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 68 BD 4B FF FF FF FF 00 00 18 FE E0 00 00 01 8B
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 32
+Info   :2026/09/23 21:41:46 [STECMDataGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 ECMData: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 68 BD 4B FF FF FF FF 00 00 18 FE E0 00
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] ECM data contains N/A or VIN not ready, retry (2/3)
+Info   :2026/09/23 21:41:46 [STECMDataGet] query ECM data start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 32 B0
+Info   :2026/09/23 21:41:46 Read_data[42 byte]: 08 00 27 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 68 BD 4B FF FF FF FF 00 00 18 FE E0 00 00 01 8B
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 32
+Info   :2026/09/23 21:41:46 [STECMDataGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 ECMData: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 68 BD 4B FF FF FF FF 00 00 18 FE E0 00
+Info   :2026/09/23 21:41:46 [control LED][controlLED] start...
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] Vin:
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] Speed:0
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] RPM:0
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] Engine Mile:1009853.75
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] Engine Hour:N/A
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] Average Mile:0
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] ECM CAN ID:65248
+Info   :2026/09/23 21:41:46 [Standby][query ECM data] sourceAddr(HEX):00
+Info   :2026/09/23 21:41:46 [read][/config/engineMile]: 1009853.75
+Info   :2026/09/23 21:41:46 [write][/config/engineMile]: 1009853.75
+Info   :2026/09/23 21:41:46 [STGPSValidGet] query GPS status start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 41 C3
+Info   :2026/09/23 21:41:46 [RuntimeLED][channel] command: 1__LedG2__LedN0__01500__00500__0
+Info   :2026/09/23 21:41:46 Read_data[8 byte]: 08 00 05 41 01 00 01 4C
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 41
+Info   :2026/09/23 21:41:46 [STGPSValidGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 GPSValid: 01
+Info   :2026/09/23 21:41:46 [Standby][query GPS status] GPS status:01
+Info   :2026/09/23 21:41:46 [STGPSDataGet] query GPS data start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 42 C0
+Info   :2026/09/23 21:41:46 [BLELedSet] set LED color start....
+Info   :2026/09/23 21:41:46 Send_data[14 byte]: 60 09 80 50 89 01 02 00 05 DC 01 F4 FF E0
+Info   :2026/09/23 21:41:46 Read_data[8 byte]: 06 03 80 50 89 00 01 5D
+Info   :2026/09/23 21:41:46 [BLEMessageGet]cmd: 50
+Info   :2026/09/23 21:41:46 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/23 21:41:46 [BLELedSet] Retcode: 0001
+Info   :2026/09/23 21:41:46 Read_data[19 byte]: 08 00 10 42 xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 42
+Info   :2026/09/23 21:41:46 [STGPSDataGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 GPSData: xx xx xx xx xx xx xx xx xx xx xx xx
+Info   :2026/09/23 21:41:46 [Standby][query GPS data] Longitude:-82.85
+Info   :2026/09/23 21:41:46 [Standby][query GPS data] Latitude:36.35
+Info   :2026/09/23 21:41:46 [Standby][query GPS data] GPS Speed:0
+Info   :2026/09/23 21:41:46 [read][/config/gpsLatitude]: 36.35
+Info   :2026/09/23 21:41:46 [read][/config/gpsLongitude]: -82.85
+Info   :2026/09/23 21:41:46 [write][/config/gpsLatitude]: 36.35
+Info   :2026/09/23 21:41:46 [write][/config/gpsLongitude]: -82.85
+Info   :2026/09/23 21:41:46 [STBatteryCheck] query battery present start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 51 D3
+Info   :2026/09/23 21:41:46 Read_data[8 byte]: 08 00 05 51 01 00 01 5C
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 51
+Info   :2026/09/23 21:41:46 [STBatteryCheck] Retcode: 0001
+Info   :2026/09/23 21:41:46 BatteryCheck: 01
+Info   :2026/09/23 21:41:46 [Standby][query battery present] battery status:01
+Info   :2026/09/23 21:41:46 [STBatteryDataGet] query battery data start....
+Info   :2026/09/23 21:41:46 Send_data[5 byte]: 80 00 02 52 D0
+Info   :2026/09/23 21:41:46 Read_data[11 byte]: 08 00 08 52 3C 03 10 18 00 01 64
+Info   :2026/09/23 21:41:46 [STMessageGet] cmd: 52
+Info   :2026/09/23 21:41:46 [STBatteryDataGet] Retcode: 0001
+Info   :2026/09/23 21:41:46 BatteryData: 3C 03 10 18
+Info   :2026/09/23 21:41:46 [Standby][query battery data] BatterySoC:60 %

@@ -41,3 +41,10 @@ timestamps, command codes, return codes, payload fields, error lines and orderin
 The HMAC key lives outside the repository (`TDF_DEID_KEY_FILE`); the phrase map likewise
 (`ELDLOG_PHRASE_MAP`). Re-identification of devices, vehicles or people from these files is not
 possible without both and is prohibited by the data terms in `LICENSE`.
+
+## Samples
+
+`data/samples/` contains two plain-text excerpts for browsing without decompressing:
+the first 400 lines of the truck log (boot, init, modem info, MQTT connect, Standby) and the
+offline-recovery sequence of the test unit (connection reset, ack timeout, re-upload with
+`is_stored = 1`).

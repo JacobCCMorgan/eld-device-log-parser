@@ -1,0 +1,201 @@
+Info   :2026/09/15 15:12:03 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/15 15:12:03 [BLELedSet] Retcode: 0001
+Info   :2026/09/15 15:12:04 [BLETemperatureGet] read ELD temperature start....
+Info   :2026/09/15 15:12:04 Send_data[6 byte]: 60 01 80 58 89 30
+Info   :2026/09/15 15:12:04 Read_data[10 byte]: 06 05 80 58 89 00 01 01 34 66
+Info   :2026/09/15 15:12:04 [BLEMessageGet]cmd: 58
+Info   :2026/09/15 15:12:04 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/15 15:12:04 [BLETemperatureGet] Retcode: 0001
+Info   :2026/09/15 15:12:04 [BLETemperatureGet]Temperature: 30.8
+Info   :2026/09/15 15:12:04 [Driving][query ELD temperature] ELDTemperature:30.8
+Info   :2026/09/15 15:11:46 [Driving] timezone: -07:00
+Info   :2026/09/15 15:11:46 [Driving] upload to backend before sleep
+Info   :2026/09/15 15:11:46 [FreeMem] sync
+Info   :2026/09/15 15:11:46 [control LED][controlLED] start...
+Consol :2026/09/15 15:11:46 [MQTT Publish]--- publish message >>:Topic:MProd/ELD/IMEI-100adf3ca3
+Consol :2026/09/15 15:11:46 [MQTT Publish]Payload:{"acc_pp":"","adas":"0","adas_e":"","bk_bat_v":"100%","br_ps":"","car_bat_v":"1","device_id":"RTHA55 DEV-ada95db42a","driver_id":"NODRIVERID","dtc":"","e_temp":"30.8","eng_hr":"0","eng_mi":"15758.00","gps_speed":"1","gps_valid":"1","is_comp":"0","is_stored":"0","lat":"34.05","lon":"-118.05","mode":"2","rpm":"0","sn":"DEV-ada95db42a","source_addr":"65535,FF","source_addr_lists":"","speed":"0","terminal_timezone":"America/New_York","timestamp":"20260915151121","timezone":"-07:00","tr_hlth":"","trl_gps_id":"NOTRAILERGPSID","usn":"202609151511210001845","vin_id":"VIN-ee644cea66"}
+Info   :2026/09/15 15:11:47 [RuntimeLED][channel] command: 3__LedB3__LedN0__00300__00300__2
+Info   :2026/09/15 15:11:47 [BLELedSet] set LED color start....
+Info   :2026/09/15 15:11:47 Send_data[14 byte]: 60 09 80 50 89 03 03 00 01 2C 01 2C 02 32
+Info   :2026/09/15 15:11:47 Read_data[8 byte]: 06 03 80 50 89 00 01 5D
+Info   :2026/09/15 15:11:47 [BLEMessageGet]cmd: 50
+Info   :2026/09/15 15:11:47 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/15 15:11:47 [BLELedSet] Retcode: 0001
+Error  :2026/09/15 15:11:47 /work/iot/src/main/MQTT/mqtt.go:652: [MQTT lostHandler]blocker connection closed:read tcp <ip>-><ip>: read: connection reset by peer
+Info   :2026/09/15 15:11:47 [MQTT reconnectHandler]DEV-ada95db42a--- auto reconnect after disconnect, consecutive disconnects:1
+Info   :2026/09/15 15:11:48 [MQTT connectHandler]Connected
+Info   :2026/09/15 15:11:48 [MQTT connectHandler]--- subscribe topics after connect:
+Info   :2026/09/15 15:11:48 [MQTT connectHandler] subscribe topic: MProd/S/IMEI-100adf3ca3/#
+Error  :2026/09/15 15:11:51 /work/iot/src/main/Controller/controller_mqtt.go:962: [WaitForAck]Time out
+Info   :2026/09/15 15:11:51 [SendDMS] backend no response, written to re-upload folder
+Info   :2026/09/15 15:11:51 [write][/config/USN]: 0001846
+Info   :2026/09/15 15:11:51 [Driving]GPS vehicle speed below 8 km/h and Speed and RPM are both N/A or 0, system will enter sleeping mode
+Info   :2026/09/15 15:11:51
+Info   :2026/09/15 15:11:51 ***************************************************
+Info   :2026/09/15 15:11:51 [Sleeping] sleeping mode flow start...
+Info   :2026/09/15 15:11:51 ***************************************************
+Info   :2026/09/15 15:11:51 [write][/config/groupNo]: 4
+Info   :2026/09/15 15:11:51 [Sleeping] upload status to backend
+Info   :2026/09/15 15:11:51 [Sleeping] clear tarlogs/sys leftover compression temp
+Info   :2026/09/15 15:11:52 [CompressLog] no content older than yesterday, not keeping empty 2026-09-14.log
+Info   :2026/09/15 15:11:52 [CompressLog] Log date filter done
+Info   :2026/09/15 15:11:52 [CompressLog] 2026-09-14.log no new content, keeping existing 2026-09-14.tar.gz, clear plaintext date log
+Info   :2026/09/15 15:11:52 [Sleeping] Log compression ok
+Info   :2026/09/15 15:11:54 [Sleeping] log rotation done
+Info   :2026/09/15 15:11:54
+Info   :2026/09/15 15:11:54 ***************************************************
+Info   :2026/09/15 15:11:54 [SelfTest] device self-test start...
+Info   :2026/09/15 15:11:54 ***************************************************
+Info   :2026/09/15 15:11:54 [SelfTest][device self-test]Check 4g
+Info   :2026/09/15 15:11:54 [network check]:
+Info   :2026/09/15 15:11:54 ***************************************************
+Info   :2026/09/15 15:11:54 [SelfTest][device self-test]state: 1
+Info   :2026/09/15 15:11:54 [SelfTest]:93.804167ms
+Info   :2026/09/15 15:11:54 [SelfTest] device self-test end
+Info   :2026/09/15 15:11:54 ***************************************************
+Info   :2026/09/15 15:11:54 [BLEFWVersionGet] get firmware version start....
+Info   :2026/09/15 15:11:54 Send_data[6 byte]: 60 01 80 20 89 48
+Info   :2026/09/15 15:11:54 [Reupload] check re-upload file: /data/APP/upload/20260915_part2
+Info   :2026/09/15 15:11:54 [Reupload] re-upload batch 1, total 1 records
+Info   :2026/09/15 15:11:54 [control LED][controlLED] start...
+Consol :2026/09/15 15:11:54 [MQTT Publish]--- publish message >>:Topic:MProd/ELD/IMEI-100adf3ca3
+Consol :2026/09/15 15:11:54 [MQTT Publish]Payload:{"acc_pp":"","adas":"0","adas_e":"","bk_bat_v":"100%","br_ps":"","car_bat_v":"1","device_id":"RTHA55 DEV-ada95db42a","driver_id":"NODRIVERID","dtc":"","e_temp":"30.8","eng_hr":"0","eng_mi":"15758.00","gps_speed":"1","gps_valid":"1","is_comp":"0","is_stored":"1","lat":"34.05","lon":"-118.05","mode":"2","rpm":"0","sn":"DEV-ada95db42a","source_addr":"65535,FF","source_addr_lists":"","speed":"0","terminal_timezone":"America/New_York","timestamp":"20260915151121","timezone":"-07:00","tr_hlth":"","trl_gps_id":"NOTRAILERGPSID","usn":"202609151511210001845","vin_id":"VIN-ee644cea66"}
+Info   :2026/09/15 15:11:54 [RuntimeLED][channel] command: 3__LedB3__LedN0__00300__00300__2
+Info   :2026/09/15 15:11:54 Read_data[26 byte]: 06 15 80 20 89 00 01 4D 53 32 35 30 32 5F 42 4C 45 5F 76 32 5F 30 5F 72 35 58
+Info   :2026/09/15 15:11:54 [BLEMessageGet]cmd: 20
+Info   :2026/09/15 15:11:54 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/15 15:11:54 [BLEFWVersionGet] Retcode: 0001
+Info   :2026/09/15 15:11:54 [BLEFWVersionGet]fwVersion: MS2502_BLE_v2_0_r5
+Info   :2026/09/15 15:11:54 [STFWVersionGet] get firmware version start....
+Info   :2026/09/15 15:11:54 Send_data[5 byte]: 80 00 02 11 93
+Info   :2026/09/15 15:11:54 Read_data[30 byte]: 08 00 1B 11 4D 53 32 35 30 32 45 4C 44 5F 76 32 5F 30 5F 62 37 5F 4F 42 44 49 49 00 01 3D
+Info   :2026/09/15 15:11:54 [STMessageGet] cmd: 11
+Info   :2026/09/15 15:11:54 [STFWVersionGet] Retcode: 0001
+Info   :2026/09/15 15:11:54 fwVersion: 4D 53 32 35 30 32 45 4C 44 5F 76 32 5F 30 5F 62 37 5F 4F 42 44 49 49
+Info   :2026/09/15 15:11:54 fwVersion: MS2502ELD_v2_0_b7_OBDII
+Info   :2026/09/15 15:11:54 [CarInfoGet]Start...
+Info   :2026/09/15 15:11:54 [STECMProtocolGet] query ECM protocol start....
+Info   :2026/09/15 15:11:54 [BLELedSet] set LED color start....
+Info   :2026/09/15 15:11:54 Send_data[14 byte]: 60 09 80 50 89 03 03 00 01 2C 01 2C 02 32
+Info   :2026/09/15 15:11:54 Send_data[5 byte]: 80 00 02 31 B3
+Info   :2026/09/15 15:11:54 Read_data[8 byte]: 06 03 80 50 89 00 01 5D
+Info   :2026/09/15 15:11:54 [BLEMessageGet]cmd: 50
+Info   :2026/09/15 15:11:54 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/15 15:11:54 [BLELedSet] Retcode: 0001
+Info   :2026/09/15 15:11:54 Read_data[8 byte]: 08 00 05 31 03 00 01 3E
+Info   :2026/09/15 15:11:54 [STMessageGet] cmd: 31
+Info   :2026/09/15 15:11:54 [STECMProtocolGet] Retcode: 0001
+Info   :2026/09/15 15:11:54 ECMProtocol: 03
+Info   :2026/09/15 15:11:54 [Sleeping][query ECM protocol] ECM protocol:03
+Info   :2026/09/15 15:11:54 [STECMDataGet] query ECM data start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 32 B0
+Info   :2026/09/15 15:11:55 Read_data[39 byte]: 08 00 27 32 56 49 4E 2D 65 65 36 34 34 63 65 61 36 36 00 0F 08 C7 00 3D 8E 00 FF FF FF FF 00 04 FF FF FF FF 00 01 2F
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 32
+Info   :2026/09/15 15:11:55 [STECMDataGet] Retcode: 0001
+Info   :2026/09/15 15:11:55 ECMData: 56 49 4E 2D 65 65 36 34 34 63 65 61 36 36 00 0F 08 C7 00 3D 8E 00 FF FF FF FF 00 04 FF FF FF FF
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] ECM data contains N/A or VIN not ready, retry (1/3)
+Info   :2026/09/15 15:11:55 [STECMDataGet] query ECM data start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 32 B0
+Info   :2026/09/15 15:11:55 Read_data[39 byte]: 08 00 27 32 56 49 4E 2D 65 65 36 34 34 63 65 61 36 36 00 0F 08 C7 00 3D 8E 00 FF FF FF FF 00 04 FF FF FF FF 00 01 2F
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 32
+Info   :2026/09/15 15:11:55 [STECMDataGet] Retcode: 0001
+Info   :2026/09/15 15:11:55 ECMData: 56 49 4E 2D 65 65 36 34 34 63 65 61 36 36 00 0F 08 C7 00 3D 8E 00 FF FF FF FF 00 04 FF FF FF FF
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] ECM data contains N/A or VIN not ready, retry (2/3)
+Info   :2026/09/15 15:11:55 [STECMDataGet] query ECM data start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 32 B0
+Info   :2026/09/15 15:11:55 Read_data[39 byte]: 08 00 27 32 56 49 4E 2D 65 65 36 34 34 63 65 61 36 36 00 0F 08 C7 00 3D 8E 00 FF FF FF FF 00 04 FF FF FF FF 00 01 2F
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 32
+Info   :2026/09/15 15:11:55 [STECMDataGet] Retcode: 0001
+Info   :2026/09/15 15:11:55 ECMData: 56 49 4E 2D 65 65 36 34 34 63 65 61 36 36 00 0F 08 C7 00 3D 8E 00 FF FF FF FF 00 04 FF FF FF FF
+Info   :2026/09/15 15:11:55 [control LED][controlLED] start...
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] Vin:VIN-ee644cea66
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] Speed:15
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] RPM:2247
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] Engine Mile:15758.00
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] Engine Hour:N/A
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] Average Mile:4
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] ECM CAN ID:65535
+Info   :2026/09/15 15:11:55 [Sleeping][query ECM data] sourceAddr(HEX):FF
+Info   :2026/09/15 15:11:55 [read][/config/engineMile]: 15758.00
+Info   :2026/09/15 15:11:55 [write][/config/engineMile]: 15758.00
+Info   :2026/09/15 15:11:55 [read][/config/vinID]: VIN-ee644cea66
+Info   :2026/09/15 15:11:55 [STGPSValidGet] query GPS status start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 41 C3
+Info   :2026/09/15 15:11:55 [RuntimeLED][channel] command: 1__LedG2__LedN0__01500__00500__0
+Info   :2026/09/15 15:11:55 Read_data[8 byte]: 08 00 05 41 01 00 01 4C
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 41
+Info   :2026/09/15 15:11:55 [STGPSValidGet] Retcode: 0001
+Info   :2026/09/15 15:11:55 GPSValid: 01
+Info   :2026/09/15 15:11:55 [Sleeping][query GPS status] GPS status:01
+Info   :2026/09/15 15:11:55 [STGPSDataGet] query GPS data start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 42 C0
+Info   :2026/09/15 15:11:55 [BLELedSet] set LED color start....
+Info   :2026/09/15 15:11:55 Send_data[14 byte]: 60 09 80 50 89 01 02 00 05 DC 01 F4 FF E0
+Info   :2026/09/15 15:11:55 Read_data[8 byte]: 06 03 80 50 89 00 01 5D
+Info   :2026/09/15 15:11:55 [BLEMessageGet]cmd: 50
+Info   :2026/09/15 15:11:55 [BLEMessageGet]Retcode: 0001
+Info   :2026/09/15 15:11:55 Read_data[19 byte]: 08 00 10 42 xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 42
+Info   :2026/09/15 15:11:55 [STGPSDataGet] Retcode: 0001
+Info   :2026/09/15 15:11:55 GPSData: xx xx xx xx xx xx xx xx xx xx xx xx
+Info   :2026/09/15 15:11:55 [Sleeping][query GPS data] Longitude:-118.05
+Info   :2026/09/15 15:11:55 [Sleeping][query GPS data] Latitude:34.05
+Info   :2026/09/15 15:11:55 [Sleeping][query GPS data] GPS Speed:14
+Info   :2026/09/15 15:11:55 [read][/config/gpsLatitude]: 34.05
+Info   :2026/09/15 15:11:55 [read][/config/gpsLongitude]: -118.05
+Info   :2026/09/15 15:11:55 [BLELedSet] Retcode: 0001
+Info   :2026/09/15 15:11:55 [write][/config/gpsLatitude]: 34.05
+Info   :2026/09/15 15:11:55 [write][/config/gpsLongitude]: -118.05
+Info   :2026/09/15 15:11:55 [STBatteryCheck] query battery present start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 51 D3
+Info   :2026/09/15 15:11:55 Read_data[8 byte]: 08 00 05 51 01 00 01 5C
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 51
+Info   :2026/09/15 15:11:55 [STBatteryCheck] Retcode: 0001
+Info   :2026/09/15 15:11:55 BatteryCheck: 01
+Info   :2026/09/15 15:11:55 [Sleeping][query battery present] battery status:01
+Info   :2026/09/15 15:11:55 [STBatteryDataGet] query battery data start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 52 D0
+Info   :2026/09/15 15:11:55 Read_data[11 byte]: 08 00 08 52 64 03 10 84 00 01 A0
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 52
+Info   :2026/09/15 15:11:55 [STBatteryDataGet] Retcode: 0001
+Info   :2026/09/15 15:11:55 BatteryData: 64 03 10 84
+Info   :2026/09/15 15:11:55 [Sleeping][query battery data] BatterySoC:100 %
+Info   :2026/09/15 15:11:55 [Sleeping][query battery data] BatteryVolt:3.4228
+Info   :2026/09/15 15:11:55 [STBattery12VCheck] query 12V battery present start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 54 D6
+Info   :2026/09/15 15:11:55 Read_data[8 byte]: 08 00 05 54 01 00 01 59
+Info   :2026/09/15 15:11:55 [STMessageGet] cmd: 54
+Info   :2026/09/15 15:11:55 [STBattery12VCheck] Retcode: 0001
+Info   :2026/09/15 15:11:55 [STBattery12VCheck]BatteryCheck: 01
+Info   :2026/09/15 15:11:55 [Sleeping][query 12V battery present] 12V battery status:01
+Info   :2026/09/15 15:11:55 [SourceMileageListGet] query source mileage list start....
+Info   :2026/09/15 15:11:55 Send_data[5 byte]: 80 00 02 33 B1
+Info   :2026/09/15 15:11:56 Read_data[7 byte]: 08 00 04 33 00 01 3E
+Info   :2026/09/15 15:11:56 [STMessageGet] cmd: 33
+Info   :2026/09/15 15:11:56 [SourceMileageListGet] Retcode: 0001
+Info   :2026/09/15 15:11:56 [SourceMileageListGet]Data: 00
+Info   :2026/09/15 15:11:56 [Sleeping][query source mileage list] source mileage list ret=0001 SourceAddrLists=
+Info   :2026/09/15 15:11:56 [Sleeping]GPS vehicle speed reached 8 km/h or more, system will enter driving mode
+Info   :2026/09/15 15:11:56
+Info   :2026/09/15 15:11:56 ***************************************************
+Info   :2026/09/15 15:11:56 [Driving] driving mode flow start...
+Info   :2026/09/15 15:11:56 ***************************************************
+Info   :2026/09/15 15:11:56 [write][/config/groupNo]: 2
+Info   :2026/09/15 15:11:56
+Info   :2026/09/15 15:11:56 ***************************************************
+Info   :2026/09/15 15:11:56 [SelfTest] device self-test start...
+Info   :2026/09/15 15:11:56 ***************************************************
+Info   :2026/09/15 15:11:56 [SelfTest][device self-test]Check 4g
+Info   :2026/09/15 15:11:56 =============================================================
+Info   :2026/09/15 15:11:56 [MQTT messageHandler]--- received message <<:Topic:MProd/S/IMEI-100adf3ca3/ack
+Info   :2026/09/15 15:11:56 [MQTT messageHandler]Payload(MSG):{"timestamp": "20260915151121", "timezone": "-07:00", "mode": "2", "is_stored": "1"}
+Info   :2026/09/15 15:11:56 =============================================================
+Info   :2026/09/15 15:11:56 [MQTT messageHandler] forward topic=MProd/S/IMEI-100adf3ca3/ack -> MQTTResendChannal (re-upload / ResendWaitForAck)
+Info   :2026/09/15 15:11:56 [Reupload] re-upload /data/APP/upload/20260915_part2 done
+Info   :2026/09/15 15:11:57 [FreeMem] sync
+Error  :2026/09/15 15:12:06 /work/iot/src/main/Lib/shell.go:45: [network check]error: exit status 1
+Info   :2026/09/15 15:12:06 [SelfTest][device self-test]:4g fail
+Info   :2026/09/15 15:12:06 SIMSWAP and set <carrier> APN start...
+Info   :2026/09/15 15:12:07
+Info   :2026/09/15 15:12:11
+Error  :2026/09/15 15:12:12 /work/iot/src/main/Lib/shell.go:45: [network check]error: exit status 2
