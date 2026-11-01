@@ -69,7 +69,9 @@ def cmd_report(paths: list[str], out: Path, sim_th: float = 0.4) -> dict:
     report.fig_ecm(M["ecm_retry_summary"], T["errors"], T["uploads"], fig_dir)
     report.fig_sessions(T["boot_sessions"], fig_dir)
     report.fig_drain(by_cluster, len(PATTERNS), fig_dir)
-    ctx = {"metrics": M, "tables": T, "drain": dr, "drain_clusters": by_cluster, "n_patterns": len(PATTERNS), "by_cmd": by_cmd,
+    steps = lines.groupby("device_key")["ts"].diff().dt.total_seconds()
+    ctx = {"clock_steps": int((steps < 0).sum()), "clock_step_max_s": float(-steps.min()) if (steps < 0).any() else 0.0,
+           "metrics": M, "tables": T, "drain": dr, "drain_clusters": by_cluster, "n_patterns": len(PATTERNS), "by_cmd": by_cmd,
            "dev1": devs[0], "dev2": devs[1] if len(devs) > 1 else devs[0], "vehicle": VEHICLE_NOTES}
     report.write_report(out / "firmware_log_report.md", ctx)
     summary = {"lines": int(len(lines)), "patterns": len(PATTERNS), "devices": devs, "coverage_unparsed": int((lines["category"] == "other").sum()),

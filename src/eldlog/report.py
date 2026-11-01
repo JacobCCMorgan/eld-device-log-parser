@@ -286,7 +286,7 @@ Drain3 (depth {4}, similarity 0.4) was run on the same lines after masking numbe
 ## 8. Limitations
 
 - Two devices, one session each ({(d1['end_ts'].max() - d1['start_ts'].min()).total_seconds() / 3600:.1f} h and {(s1.loc[s1.device_key == dev2, 'end_ts'].max() - s1.loc[s1.device_key == dev2, 'start_ts'].min()).total_seconds() / 60:.0f} min). Every rate above describes these sessions, not the fleet.
-- One-second timestamps: latencies below a second are indistinguishable from zero.
+- One-second timestamps: latencies below a second are indistinguishable from zero. The device clock stepped backwards {ctx['clock_steps']} time(s) (NTP re-sync, {ctx['clock_step_max_s']:.0f} s at most); the affected round-trip is left as logged.
 - The logs were normalized to English and de-identified before publication (`data/SOURCE.md`); byte dumps that carried identifiers were rewritten, so their trailing checksum bytes no longer verify.
 - The wake-up reason codes and the ST command set are interpreted from the log alone; the firmware source was not consulted.
 """
